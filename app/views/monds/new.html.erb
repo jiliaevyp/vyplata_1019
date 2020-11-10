@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Настройка месяца</title>
+  </head>
+<body>
+<div class="container">
+  <div class="header">Начисление заработной платы<br> ООО "Геопласт Телеком" </div>
+
+  <div class="sidebar">
+    <% if $glob_permition >0 %>
+      <%=render('welcome/form_glob_sidebar') %>
+    <% else %>
+      <%= render('welcome/form_sidebar') %> </div>
+    <% end %>
+  </div>
+
+  <div class="content_1_col">
+    <% if @access_new > 0 || $glob_permition > 0 %>
+    <%= render('form_new_mond') %><br>
+      <button class="button"><%= link_to 'Выход', monds_path %></button><br><br>
+
+    <p>Заполните поля в таблице </p>
+    <% else %>
+    <h1><%= link_to 'Вас нет доступа!', welcome_index_path %></h1>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>

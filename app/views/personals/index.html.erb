@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>Персонал </h5></title>
+ </head>
+<body>
+  <div class="container">
+    <div class="header">Начисление заработной платы<br>ООО "Геопласт Телеком"</div>
+    <div class="sidebar">
+      <% if $glob_permition >0 %>
+        <%=render('welcome/form_glob_sidebar') %>
+      <% else %>
+        <%= render('welcome/form_sidebar') %>
+      <% end %>
+    </div>
+  <div class="content">
+    <% if @access_index > 0 || $glob_permition >0 %>
+      <%= render 'form_index_personals' %>
+      <ul><strong>
+      <% if @access_full > 0 || $glob_permition >0 %>
+        <li><%= link_to 'Новый сотрудник', new_personal_path(@personal) %></li>
+        <li><%= render 'form_block_personals' %></li>
+      </strong></ul>
+      <%end %>
+    <%else %>
+      <h1>Отсутствует доступ к данным!</h1>
+    <% end %>
+    <br><button class="button"><%= link_to 'Выход', monds_path %></button>
+  </div>
+</body>
+<footer</footer>
+</html>

@@ -1,0 +1,18 @@
+<!-- form for passive sidebar -->
+
+<h2> Текущий месяц:<br>
+<% if $jetzt_yahre != nil %>
+    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %>
+<% else %>
+    <strong> Рабочий год и месяц не выбраны!</strong>
+<% end %><br>
+</h2>
+<h2><div text-color = "yellow">
+  <p>Месяц</p>
+  <p>Сотрудники</p>
+  <p>Табель</p>
+  <p>Отзывы</p>
+  <p>Начисление</p>
+  <p>Ведомость</p>
+  <p>Выход</p></div>
+</strong></h2>

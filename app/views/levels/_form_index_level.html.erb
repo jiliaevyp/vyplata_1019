@@ -1,0 +1,65 @@
+
+<table border="1" >
+  <caption><h2>
+    Администратор <br>
+    <%= @personal.title  %><br>
+    <%= @admin.email  %></h2>
+    <h3>Доступ к страницам сайта </h3>
+    </caption>
+
+    <thead>
+    <tr>
+      <th>№</th>
+      <th>Страница</th>
+      <th>Params[:format]</th>
+      <th>Доступ к отделам</th>
+      <th>Блокировка страниц</th>
+      <th>Таблица</th>
+      <th>Просмотр</th>
+      <th>Изменение</th>
+      <th>Новая запись</th>
+      <th>Удаление</th>
+      <th>Печатать</th>
+      <th>E-mail</th>
+      <th>Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%num = 0 %>
+    <% if @levels %>
+      <% @levels.each do |t| %>
+        <tr >
+          <td align="center"><%= num += 1 %></td>
+          <td align="center"><%= link_to $level_index_controller[t.access_controller], level_path(t) %></td>
+          <% if t.access_controller == $tabels%>
+            <td align="center"><%= $level_format[t.format] %></td>
+          <% else %>
+            <td class ='pasline'></td>
+          <% end %>
+          <% if t.access_controller == "monds" %>
+            <td class ='pasline'></td>
+          <% else %>
+          <td align="center"><%= $access_show[t.access_all_otdel.to_i] %></td>
+          <% end %>
+          <td align="center"><%= $access_show[t.access_full.to_i] %></td>
+          <td align="center"><%= $access_show[t.access_index.to_i] %></td>
+          <td align="center"><%= $access_show[t.access_show.to_i] %></td>
+          <td align="center"><%= $access_show[t.access_edit.to_i] %></td>
+          <% if t.access_controller == $tabels%>
+            <td class ='pasline'></td>
+            <td class ='pasline'></td>
+          <% else %>
+          <td align="center"><%= $access_show[t.access_new.to_i] %></td>
+          <td align="center"><%= $access_show[t.access_del.to_i] %></td>
+          <% end %>
+          <td align="center"><%= $access_show[t.access_print.to_i] %></td>
+          <td align="center"><%= $access_show[t.access_email.to_i] %></td>
+          <td align="center"><%= link_to 'Удалить запись', t, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      <% end %>
+    <% end %>
+    </tbody>
+</table>
+<br>
+
+
+

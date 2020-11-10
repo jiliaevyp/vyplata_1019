@@ -1,0 +1,51 @@
+<!-- form for aktive sidebar -->
+<span class="noprint">
+<h2> Текущий месяц:<br>
+  <% if $jetzt_yahre.nil? || $jetzt_num_monat.nil? %>
+    <strong> Рабочий год и месяц не выбраны!</strong>
+  <% else %>
+    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %>
+  <% end %><br>
+  <strong----------------
+  <% if @real_admin %>
+    Пользователь <br><%= @real_admin.title %>
+    <% else %>
+    <%= link_to 'Пользователь не найден!', welcome_index_path(format:"exit") %>
+  <% end %><br>----------------
+  </strong>
+</h2>
+<strong>
+  <% if params[:controller] == "monds" || params[:action] != "index" %>
+    <p><div class="passiv_button_sidebar">Выбор месяца</div></p>
+  <% else %>  <p><a> <div class="action_button_sidebar"><%= link_to 'Выбор месяца', monds_path  %> </div></a></p>
+  <% end %>
+  <% if params[:controller] == "personals" || @mond.nil? || params[:action] != "index"%>
+    <p><div class="passiv_button_sidebar">Сотрудники</div></p>
+  <% else %> <p><div class="action_button_sidebar"><a><%= link_to 'Сотрудники', personals_path %></a></div></p>
+  <% end %>
+  <% if (params[:controller] == "tabels" && params[:format]==$format_time)|| @mond.nil? || params[:action] != "index"%>
+    <p><div class="passiv_button_sidebar">Табель</div></p>
+  <% else %> <p><div class="action_button_sidebar"><a><%= link_to 'Табель', tabels_path(format: $format_time)  %></a></div></p>
+  <% end %>
+
+  <% if params[:controller] == "comments" || @mond.nil? || params[:action] != "index"%>
+    <p><div class="passiv_button_sidebar">Отзывы</div></p>
+  <% else %> <p><div class="action_button_sidebar"><a> <%= link_to 'Отзывы', comments_path  %></a></div></p>
+  <% end %>
+
+  <% if (params[:controller] == "tabels" && params[:format]==$format_tabel)|| @mond.nil? || params[:action] != "index"%>
+    <p><div class="passiv_button_sidebar">Начисление</div></p>
+  <% else %> <p><div class="action_button_sidebar"><a> <%= link_to 'Начисление',  tabels_path(format: $format_tabel) %></a></div></p>
+  <% end %>
+
+  <% if (params[:controller] == "tabels" && params[:format]==$format_buchtabel)|| @mond.nil? || params[:action] != "index"%>
+    <p><div class="passiv_button_sidebar">Ведомость</div></p>
+  <% else %> <p><div class="action_button_sidebar"><a> <%= link_to 'Ведомость', tabels_path(format: $format_buchtabel)  %></a></div></p>
+  <% end %>
+  <% if params[:action] != "index"%>
+    <p><div class="passiv_button_sidebar">Выход</div></p>
+  <% else %> <p><div class="action_button_sidebar"><a> <%= link_to 'Выход', welcome_index_path(format:"exit"),
+            data: {confirm:'Вы действительно хотите закончить сессию?' } %></a></div></p>
+  <% end %>
+</strong>
+  </span>

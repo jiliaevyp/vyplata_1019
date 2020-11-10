@@ -1,0 +1,40 @@
+<!-- form for index comment  -->
+<table border = "1">
+  <caption><h3>
+    Отзывы на сотрудников<br>
+    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %> <br>
+     </h3></caption>
+  <thead>
+  <tr>
+     <th align="center">№</th>
+    <th align="center">Фамилия</th>
+    <th align="center">Должность</th>
+    <th align="center">Отдел</th>
+    <th align="center">Просмотр</th>
+    <th align="center">Создать</th>
+  </tr>
+  </thead>
+  <tbody>
+    <%num = 0 %>
+    <% @tabels.each do |f| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <% if f.personal_id != @real_admin.id %>     <!-- просмотр отзывов на себя невозможен -->
+        <td><%= num += 1        %></td>                                   <!-- гендиректору можно -->
+        <td><%= f.title %></td>
+        <td><%= f.kadr  %></td>
+        <td align="center"><%= $otdel_long[f.num_otdel.to_i] %></td>
+          <% if @access_show >0 %>
+            <td class="list_action"><%= link_to "Просмотр", comments_show_path(f.id) %></td>
+          <% else %>
+            <td class="list_action"><%= "Недоступно" %></td>
+          <% end %>
+          <% if @mond.block_comment == 0 && @access_new >0 %>
+            <td class="list_action"> <%= link_to "Написать", new_comment_path(f.id)  %></td>
+          <%else %>
+            <td class="list_action"><%= "Недоступно" %></td>
+          <% end %>
+        <%end %>
+  <% end %>
+  </tr>
+  </tbody>
+</table>

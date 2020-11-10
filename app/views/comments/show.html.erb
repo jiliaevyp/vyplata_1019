@@ -1,0 +1,27 @@
+<html>
+<head><title>Табель сотрудника</title><body>
+<div class="container">
+  <div class="header">Начисление заработной платы<br> ООО "Геопласт Телеком" </div>
+  <div class="sidebar"><%= render('welcome/form_sidebar') %> </div>
+
+
+    <div class="content_1_col_comment">
+      <%= render 'form_from_tabel_comment' %><br>
+      <button class="button"><%= link_to 'Выход', comments_path %></button><br><br>
+    </div>
+    <div class="content_2_col_comment">
+      <%= render 'form_show_comment' %>
+      <% if @mond.block_comment == 0 %>
+        <% if @access_edit >0 %>
+          <strong><li><%= link_to 'Изменить', edit_comment_path(@comment) %></li>
+        <% end %>
+        <% if @access_del >0 %>
+          <li><%= link_to 'Удалить', @comment, method: :delete,
+                                             data: { confirm: 'Удалить отзыв, Вы уверены?' } %></strong></li>
+        <% end %>
+      <% end %>
+    </div>
+</div>
+</body>
+<footer></footer>
+</html>

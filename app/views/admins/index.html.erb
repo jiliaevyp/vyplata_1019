@@ -1,0 +1,28 @@
+<html>
+<head>
+  <title>Пользователи</title>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">Начисление заработной платы<br> ООО "Геопласт Телеком" </div>
+
+  <div class="sidebar">
+    <% if $glob_permition >0 %>
+      <%=render('welcome/form_glob_sidebar') %>
+    <% end %>
+  </div>
+
+  <div class="content">
+    <% if $glob_permition > 0 %>
+      <%= render('form_index_admin') %><br>
+      <button class="button"><%= link_to 'Новый', new_admin_path %></button>
+    <% else %>
+      <h1><%= link_to 'Вас нет доступа!', welcome_index_path(format: "begin") %></h1>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>
+
+

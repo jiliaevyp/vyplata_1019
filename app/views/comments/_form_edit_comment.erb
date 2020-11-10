@@ -1,0 +1,15 @@
+<!-- form for new/edit comment -->
+
+
+<%= form_for(@comment) do |f| %>
+    <caption><h3>
+    <%= "Автор отзыва" %><br>
+      <%= @comment.commenter_title %></h3>
+    Сотрудник <%= @tabel.title %>
+    </caption><br>
+
+    <%= f.text_area(:body, size: "50x4") %> <br>
+    <%= "Оценка" %> <%= f.select :plunus, (1..10) %> <br><br>
+
+  <button class="button"><%= f.submit 'Сохранить' %></button>
+<% end %>

@@ -1,0 +1,49 @@
+<!-- Form for personal -->
+<%= form_for(@personal) do |f| %>
+    <% if @personal.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@personal.errors.count, "error") %> prohibited this personal from being saved:</h2>
+          <ul>
+            <% @personal.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+<table border="1">
+  <caption><caption>Личная карта сотрудника</caption></h3><br>
+          <% n = 0 %>
+ <tbody>
+  <tr> <td><%= n += 1 %></td> <td>Фото</td> <td align = "center"><%= f.text_field :image_url, :class => "input"  %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Фамилия</td> <td align = "center"><%= f.text_field :title, :default => @personal.title, :class => "input" %></td> </tr>
+
+  <tr> <td><%= n += 1 %></td> <td>Имя</td> <td align = "center"><%= f.text_field :forname, required:true,:class => "input"  %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Отчество</td> <td align = "center"><%= f.text_field :fornametwo, :class => "input"  %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Должность</td><td align = "center"><%= f.select :kadr, $kadr %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Отдел</td><td align = "center"><%= f.select(:num_otdel, $person_otdel) %></td></tr>
+   <tr> <td><%= n += 1 %></td> <td>Образование</td><td align = "center"><%= f.select :bilding, $bilding %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Ценность</td><td align = "center"><%= f.select :werte, (1..10), :class => "input" %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Тариф (руб/час)</td><td align = "center"><%= f.number_field :tarifhour, min: 0, step:10,:class => "input" %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Поступил</td><td align = "center"><%= f.date_select :begdata, start_year: 1991 %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Уволен</td> <td align = "center"><%= f.date_select :enddata, start_year: 2017 %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Д.рождения</td> <td align = "center"><%= f.date_select :borndata, start_year: 1950%></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Семья</td> <td align = "center"><%= f.select :familie, $family %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Дети</td> <td align = "center"><%= f.select :kinder, $kinder %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Жилье</td> <td align = "center"><%= f.select :haus, $haus %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Адрес регистрации</td> <td align = "center"><%= f.text_field :address, required:true,:class => "input" %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Адрес проживания</td> <td align = "center"><%= f.text_field :realaddress, required:true,:class => "input" %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Телефон</td> <td align = "center"><%= f.telephone_field :tel,required:true,:class => "input" %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Е-майл</td> <td align = "center"><%= f.email_field :email, :class => "input" %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Включить в ведомость</td> <td align = "center"><%= f.select :real, $real_option %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Комментарии</td> <td align = "center"><%= f.text_area :information, :class => "input" %></td> </tr>
+  <% if $glob_permition >0 %>
+    <tr> <td><%= n += 1 %></td> <td>Администратор </td> <td align = "center"><%= f.select :personal_admin, $admin_input  %></td> </tr>
+    %></td> </tr>
+ <% end %>
+</tbody>
+</table>
+  <br><button class="button"> <%= f.submit("Сохранить") %></button>
+<% end %>
+
+
+

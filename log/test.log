@@ -1,0 +1,326 @@
+  [1m[36m (13.1ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "personal_id" integer, "email" varchar, "glob_admin" integer DEFAULT 0, "encrypted_password" varchar DEFAULT '' NOT NULL, "password_digest" varchar, "password" varchar DEFAULT '', "open_password" varchar DEFAULT '', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (12.8ms)[0m  [1mCREATE  INDEX "index_admins_on_personal_id" ON "admins" ("personal_id")[0m
+  [1m[35m (14.7ms)[0m  CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mond_id" integer, "personal_id" integer, "tabel_id" integer, "title" varchar, "email" varchar, "commenter_id" integer, "commenter_title" varchar, "body" text, "plunus" integer DEFAULT 0, "data" date, "close_update" integer, "reservstring" varchar, "reservint" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (13.7ms)[0m  [1mCREATE  INDEX "index_comments_on_mond_id" ON "comments" ("mond_id")[0m
+  [1m[35m (1.5ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comments_on_mond_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comments_on_mond_id' AND type='index'
+
+  [1m[36m (14.5ms)[0m  [1mCREATE  INDEX "index_comments_on_personal_id" ON "comments" ("personal_id")[0m
+  [1m[35m (1.5ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comments_on_personal_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comments_on_personal_id' AND type='index'
+
+  [1m[36m (1.5ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comments_on_mond_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comments_on_mond_id' AND type='index'
+[0m
+  [1m[35m (13.7ms)[0m  CREATE  INDEX "index_comments_on_tabel_id" ON "comments" ("tabel_id")
+  [1m[36m (16.0ms)[0m  [1mCREATE TABLE "levels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "admin_id" integer, "access_controller" varchar, "access_action" varchar, "format" varchar, "format_next" varchar, "access_all_otdel" integer, "access_full" integer, "access_index" integer, "access_show" integer, "access_edit" integer, "access_new" integer, "access_del" integer, "access_print" integer, "access_email" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (14.2ms)[0m  CREATE  INDEX "index_levels_on_admin_id" ON "levels" ("admin_id")
+  [1m[36m (17.4ms)[0m  [1mCREATE TABLE "monds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "yahre" varchar, "num_monat" integer, "tag" integer DEFAULT 21, "hour" integer DEFAULT 168, "kfoberhour" decimal(2,1) DEFAULT 2.0, "kfnalog" integer DEFAULT 13, "procentsocial" integer DEFAULT 24, "block_mond" integer DEFAULT 0, "block_personal" integer DEFAULT 0, "block_real_personal" integer DEFAULT 0, "block_comment" integer DEFAULT 0, "block_timetabel" integer DEFAULT 0, "block_tabel" integer DEFAULT 0, "block_buchtabel" integer DEFAULT 0, "close_update" integer DEFAULT 0, "reservstring" varchar, "reservint" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (19.2ms)[0m  CREATE TABLE "personals" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "forname" varchar, "fornametwo" varchar, "image_url" varchar, "kadr" varchar, "num_otdel" integer, "otdel" varchar, "real" integer, "tarifhour" integer, "begdata" date, "enddata" date, "bilding" varchar, "borndata" date, "familie" varchar, "kinder" varchar, "haus" varchar, "auto" varchar, "address" varchar, "realaddress" varchar, "tel" varchar, "email" varchar DEFAULT '', "werte" varchar, "information" text, "close_update" integer, "reservstring" varchar, "reservint" integer, "personal_admin" integer DEFAULT 0, "encrypted_password" varchar DEFAULT '' NOT NULL, "password_digest" varchar, "password" varchar DEFAULT '', "open_password" varchar DEFAULT '', "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (13.8ms)[0m  [1mCREATE TABLE "tabels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "personal_id" integer, "mond_id" integer, "title" varchar, "kadr" varchar, "email" varchar, "num_otdel" integer, "tarifhour" integer, "num_monat" integer, "yahre" varchar, "tag" integer, "hour" integer, "kfoberhour" integer, "kfnalog" integer, "procentsocial" integer, "tagemach" integer DEFAULT 21, "hourmach" integer DEFAULT 168, "oberhour" integer DEFAULT 0, "krankentage" integer DEFAULT 0, "urlaub" integer DEFAULT 0, "reisetage" integer DEFAULT 0, "hourgeld" decimal, "reisegeld" decimal, "oberhourgeld" decimal, "oklad" decimal, "proc_bonus" decimal, "bonus" integer, "nadbavka" integer, "summa" decimal, "krankengeld" integer, "urlaubgeld" integer, "minus" integer DEFAULT 0, "textminus" varchar, "gehalt" decimal, "nalog" decimal(8,2), "naruki" decimal(8,2), "social" decimal(8,2), "vsego" decimal(8,2), "close_update_tabel" integer, "reservstring" varchar, "reservint" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (18.2ms)[0m  CREATE  INDEX "index_tabels_on_mond_id" ON "tabels" ("mond_id")
+  [1m[36m (1.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tabels_on_mond_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tabels_on_mond_id' AND type='index'
+[0m
+  [1m[35m (17.3ms)[0m  CREATE  INDEX "index_tabels_on_personal_id" ON "tabels" ("personal_id")
+  [1m[36m (14.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (13.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (2.7ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (17.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20190826181951')
+  [1m[36m (15.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20170204151029')[0m
+  [1m[35m (15.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20170204151127')
+  [1m[36m (15.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20170204151010')[0m
+  [1m[35m (16.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20170204150943')
+  [1m[36m (15.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20190814192532')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.7ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:06', '2020-09-09 19:42:06', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:06', '2020-09-09 19:42:06', 298486374)[0m
+  [1m[35mFixture Delete (2.9ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (8.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:06', '2020-09-09 19:42:06', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:06', '2020-09-09 19:42:06', 298486374)[0m
+  [1m[35mFixture Delete (5.2ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.2ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.1ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.1ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.4ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.9ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.3ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.7ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (3.4ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (4.4ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (5.1ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.4ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (2.3ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.8ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.5ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (4.3ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.0ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.7ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (4.3ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (5.5ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.1ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.5ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.9ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.5ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.7ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.9ms)[0m  DELETE FROM "admins"
+  [1m[36m (7.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.0ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.1ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.9ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.8ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.1ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.1ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (9.2ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.2ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.6ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.0ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 980190962)
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:07', '2020-09-09 19:42:07', 298486374)[0m
+  [1m[35mFixture Delete (3.1ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.1ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (3.2ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.7ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (4.7ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.8ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (5.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (3.0ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (4.0ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mFixture Delete (12.3ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.2ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (4.0ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (5.8ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.4ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (2.9ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.9ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.2ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.3ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (4.5ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mFixture Delete (9.3ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.7ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (2.9ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.3ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.4ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (2.7ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.8ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.9ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (3.2ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mFixture Delete (9.6ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (4.5ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.2ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.7ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (3.0ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.8ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:08', '2020-09-09 19:42:08', 298486374)[0m
+  [1m[35mFixture Delete (4.3ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.8ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.8ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.8ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.1ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (5.3ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (2.8ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.3ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.1ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.8ms)[0m  DELETE FROM "admins"
+  [1m[36m (7.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.2ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.0ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (2.9ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.2ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.1ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.3ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.1ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.8ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mFixture Delete (8.6ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.1ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.0ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.4ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.9ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.3ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (7.7ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (4.5ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.0ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.5ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (5.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.7ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (4.0ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.9ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (8.3ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:09', '2020-09-09 19:42:09', 298486374)[0m
+  [1m[35mFixture Delete (3.8ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.8ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.9ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.0ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 298486374)[0m
+  [1m[35mFixture Delete (3.3ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (5.5ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.5ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 298486374)[0m
+  [1m[35mFixture Delete (3.0ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (10.0ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.2ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 298486374)[0m
+  [1m[35mFixture Delete (3.9ms)[0m  DELETE FROM "admins"
+  [1m[36m (6.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (8.7ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (2.1ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 298486374)[0m
+  [1m[35mFixture Delete (3.5ms)[0m  DELETE FROM "admins"
+  [1m[36m (5.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (6.1ms)[0m  [1mDELETE FROM "personals"[0m
+  [1m[35mFixture Insert (1.6ms)[0m  INSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "personals" ("created_at", "updated_at", "id") VALUES ('2020-09-09 19:42:10', '2020-09-09 19:42:10', 298486374)[0m
+  [1m[35mFixture Delete (2.9ms)[0m  DELETE FROM "admins"
+  [1m[36m (4.6ms)[0m  [1mrollback transaction[0m

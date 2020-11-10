@@ -1,0 +1,47 @@
+<!-- form for time/tabel/buchtabel Tabel -->
+<head>
+  <title>Карта ведомости сотрудника</title>
+   <style media='print' type='text/css'>
+    #navbar-iframe {display: none; height: 0px; visibility: hidden;}
+    .noprint {display: none;}
+    body {background:#FFF; color:#000;}
+    a {text-decoration: underline; color:#00F;}
+    text {font-size: smaller;}
+    }
+  </style>
+  </head>
+<body>
+<div class="container">
+  <span class="noprint">
+  <div class="header">Начисление заработной платы<br>ООО "Геопласт Телеком"</div>
+  <div class="sidebar"><%= render('welcome/form_sidebar') %> </div>
+  </span>
+  <div class="content_1_col">
+
+    <% case  params[:format]%>
+    <% when $format_time %>
+      <%= render 'form_show_time' %>
+    <% when $format_tabel %>
+      <%= render 'form_show_tabel' %>
+    <% when $format_buchtabel %>
+      <%= render 'form_show_buchtabel' %>
+      <span class="noprint">
+      <% if @access_print && @mond.block_buchtabel > 0 %>
+          <button class="button" onclick="window.print();">Печать </button><%end %>
+        <% if @access_email && @mond.block_buchtabel > 0%>
+          <%= render 'form_send_cardtabel_to_mail' %>
+          <%= render 'form_sassoft_send_cardtabel_to_mail' %>
+        <%end %>
+        <br><button class="button"><%= link_to 'Выход', tabels_path(format: $format_buchtabel) %></button>
+      </span>
+        <div>
+        <p><strong> Директор                                     Жиляев Ю.  </strong></p>
+        <p><strong> Главный бухгалтер                            Лазарева Е. </strong></p>
+      </div>
+    <%else %>
+      <h3> Нет доступа!</h3>
+    <%end %>
+  </div>
+</div>
+</body>
+</html>

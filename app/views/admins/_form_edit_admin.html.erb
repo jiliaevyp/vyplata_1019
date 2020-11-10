@@ -1,0 +1,34 @@
+<!-- Form for Admin -->
+<%= form_for(@admin) do |f| %>
+  <% if @admin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
+
+      <ul>
+        <% @admin.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table border="1">
+    <caption><h3>Карта пользователя</h3></caption>
+
+    <thead>
+    <tr>
+      <th>№</th>
+      <th>Наименование</th>
+      <th>Содержание</th>
+    </tr>
+    </thead>
+    <% n=0 %>
+    <tbody>
+    <tr> <td><%= n += 1 %></td> <td>Фамилия:</td> <td align="center"><%= @personal.title %></td> </tr>
+    <tr> <td><%= n += 1 %></td> <td>Эл. почта</td><td align="center"><%= @personal.email %></td>
+    <tr> <td><%= n += 1 %></td> <td>Пароль</td> <td align = "center"><%= f.text_field :password, :class => "input" %></td> </tr>
+    <tr> <td><%= n += 1 %></td> <td>Пароль</td> <td align = "center"><%= f.password_field :password_confirmation, :class => "input" %></td> </tr>
+    </tbody>
+  </table>
+  <br><button class="button"> <%= f.submit("Сохранить") %></button><br>
+<% end %>
+

@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>Создание персональной карты сотрудника</title>
+</head>
+<body>
+<div class="container">
+
+<span class="noprint"> <div class="header">Начисление заработной платы<br>ООО "Геопласт Телеком"</div></span>
+  <div class="sidebar">
+       <% if $glob_permition >0 %>
+         <%=render('welcome/form_glob_sidebar') %>
+       <% else %>
+         <%= render('welcome/form_sidebar') %>
+       <% end %>
+  </div>
+
+  <div class="content_1_col">
+    <%= render('form_show_personal') %>   <!-- форма полной карты персонала-->
+    <span class="noprint">
+    <ul><strong>
+      <% if @access_edit > 0  || $glob_permition > 0 %>
+          <li><%= link_to 'Изменить', edit_personal_path(@personal) %></li>
+        <% end %>
+        <% if @access_del > 0 || $glob_permition > 0%>
+          <li><%= link_to 'Удалить', @personal, method: :delete,
+                                             data: { confirm: 'Удалить карту сотрудника, Вы уверены?' } %></li>
+        <% end %>
+      <% if @access_print > 0 || $glob_permition > 0%>
+          <li><button onclick="window.print();">Печатать </button></li>
+        <% end %>
+        <br><button class="button"><%= link_to 'Выход', personals_path %></button>
+
+     </span>
+  </div>
+  <div class="content_2_col"><br><br>
+    <%= image_tag(@personal.image_url, class: 'list_image') %></div>
+  </div>
+</div>
+</body>
+</html>

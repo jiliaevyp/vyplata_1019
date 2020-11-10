@@ -1,0 +1,2 @@
+module MondsHelper
+end

@@ -1,0 +1,33 @@
+<!-- render for comments show -------------->
+<table border = "1">
+  <caption> <h3>Отзывы на сотрудника <br>
+    <%= @tabel.title %><br>
+    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3></caption>
+<thead>
+<tr>
+  <th>№</th><th>Отзыв</th><th>Оценка</th><th>Автор отзыва></th><th>Просмотр</th>
+</tr>
+</thead>
+<tbody>
+<%num = 0%>
+<% if @comments %>
+  <% @comments.each  do |t| %>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+    <% if t.commenter_title == @real_admin.title %>
+      <td> <%= num += 1        %></td>
+      <td allign="left"><%= t.body %></td>
+      <td align="center"><%= t.plunus  %></td>
+      <td align="center"><%= t.commenter_title %></td>
+      <td><%= link_to "Просмотр", comment_path(t.id)%></td>
+    <% end %>
+  <% end %>
+
+<% else %>
+    <strong> <h3>Отзывов нет!</h3></strong>
+<% end %>
+  </tr>
+<% if num >0  %>
+  <tr><td></td><td allign="center">Средняя оценка</td><td align="center"><%= sprintf("%0.1f",@srnplunus) %></td></tr>
+<% end %>
+</tbody>
+</table>

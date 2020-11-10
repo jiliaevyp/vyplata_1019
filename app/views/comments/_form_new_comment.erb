@@ -1,0 +1,13 @@
+<!-- form for new comment -->
+
+<strong>Отзыв</strong>
+<%= form_for(@comment) do |f| %>
+    <%= f.text_area(:body, size: "50x4") %> <br>
+    <%= "Оценка" %> <%= f.select :plunus, (1..10) %> <br><br>
+    <%= "Автор отзыва:" %><%= @real_admin.title %><br>
+  <br>
+
+  <div class="actions">
+    <button class="button"> <%= f.submit("Сохранить") %></button>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Настройка месяца</title></head>
+<body>
+<div class="container">
+  <div class="header">Начисление заработной платы<br>
+    ООО "Геопласт Телеком"
+  </div>
+  <div class="sidebar"><%= render('welcome/form_sidebar') %> </div>
+  <div class="content">
+    <% if @access_index > 0 %>
+      <div class="content_1_col_comment">  <%= render('form_from_tabel_comment') %>
+        <p><button class="button"><%= link_to 'Выход', comments_path, :class=>"button"%></button></div>
+
+      <div class="content_2_col_comment"> <%= render('form_edit_comment') %></div>
+    <% else %>
+      <h1><button class="button"><%= link_to 'Вас нет доступа!', welcome_index_path %></button></h1>
+    <% end %>
+  </div>
+</div>
+</body>
+<footer></footer>
+</html>

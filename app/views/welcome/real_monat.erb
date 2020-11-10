@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>Начисление зарплаты главная</title>
+  <h5><%= @page_title || "Главная" %></h5>
+</head>
+
+<body>
+<div class="container">
+  <div class="header">Начисление заработной платы<br>
+    ООО "Геопласт Телеком"</div>
+  <div class="sidebar">
+    <% if @glob_permition >0 %><%= render('welcome/form_glob_sidebar') %>
+    <% else %>
+      <% if  @permition > 0 %>
+        <%= render('welcome/form_sidebar') %>
+      <% else %>
+        <%= render('form_passiv_sidebar') %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="content">
+    <h1><strong> Рабочий месяц<br>
+    <%= $jetztmonat %>  <%= $jetzt_yahre %></strong><br></h1>
+     <br>
+      Для дальнейшей работы необходимо заполнить все поля рабочего месяца
+      <p><h2><%= link_to 'Заполнить поля', new_mond_path, class: "button"  %></p></h2>
+    </p>
+  </div>
+</div>
+<div class="footer">&copy; Жиляев Юрий - jiliaevyp@gmail.coim</div>
+</body>
+</html>

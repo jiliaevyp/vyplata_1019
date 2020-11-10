@@ -1,0 +1,53 @@
+<!-- form for edit @tabel -->
+<%= form_for(@tabel) do |f| %>
+    <% if @tabel.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@tabel.errors.count, "error") %> prohibited this mond from being saved:</h2>
+          <ul>
+            <% @tabel.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+<% end %>
+<%= form_for(@tabel) do |f| %>
+    <table border="1">
+      <caption> <h3>Карта ведомости <br>
+        <%= @tabel.title %><br>
+        <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3></caption>
+      <tbody>
+      <% n = 0 %>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Должность</td>
+                            <td align="center"><%= @tabel.kadr %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Отдел</td>
+                            <td align="center"><%= $otdel_long[@tabel.num_otdel] %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Рабочих дней в месяце</td>
+                            <td align="center"><%= @tabel.tag %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Рабочих часов в месяце</td>
+                            <td align="center"><%= @tabel.hour %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Коэфф. сверхурочных</td>
+                            <td align="center"><%= @tabel.kfoberhour %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Отработано дней</td>
+                            <td align="center"><%= @tabel.tagemach %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Отработано часов</td>
+                            <td align="center"><%= @tabel.hourmach %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Сверхурочных часов</td>
+                            <td align="center"><%= @tabel.oberhour %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Часовая ставка</td>
+                            <td align="center"><%= @tabel.tarifhour %></td></tr>
+      <tr class ='pasline'><td><%= n +=1 %></td><td>Начислен оклад</td>
+                            <td align="right"><%= sprintf("%0.02f руб",@tabel.oklad) %></td></tr>
+      <tr>                  <td><%= n += 1 %></td><td><%= f.label :nadbavka,"Надбавка (руб)"%></td>
+                            <td align="right"><%= f.number_field :nadbavka,step:"500", :class=>"input"%></td> </tr>
+      <tr>                  <td><%=n += 1 %></td><td><%= f.label :proc_bonus, "Премия (%)"%></td>
+                            <td align="center"><%= f.number_field :proc_bonus,:min=>"0",step:5,:class=>"input" %></td> </tr>
+      <tr>                 <td><%= n += 1 %></td> <td>Премия</td>
+                            <td align="right"><%= sprintf("%0.02f руб",@tabel.bonus) %></td></tr>
+      <tr class ='pasline'> <td><%= n += 1 %></td> <td>Всего начислено</td>
+                            <td align="right"><%= sprintf("%0.02f руб", @tabel.summa) %></td> </tr>
+      </tbody>
+    </table><br>
+  <button class="button"><%= f.submit "Сохранить"%></button><br><br>
+  <button class="button"><%= link_to "Выход без сохранения", tabel_path(@tabel,format: $format_tabel) %></button>
+  <% end %>

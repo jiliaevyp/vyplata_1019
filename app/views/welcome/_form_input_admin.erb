@@ -1,0 +1,13 @@
+<!-- form for input email & password for session admin -->
+
+  <%= form_tag do %>
+  <legend>Для входа введите правильно свои данные</legend><br><br>
+  <h3<%= label_tag(:email, "E-mail") %>
+    ><% if @personals.count == 0 %>
+      <td><%= email_field :email, params[:email], :class => "text_field" %></td><br>
+    <% else  %>
+      <td><%= select_tag :email, options_from_collection_for_select(Personal.where(personal_admin: $personal_admin), :email, :title) %></td><br><% end %>
+    <%= label_tag(:pass, "Пароль ") %>
+    <td><%= password_field_tag(:pass, params[:pass], class: "text_field") %></td></h3><br><br>
+    <%= submit_tag("Подтвердить" , class: "submit") %>
+  <% end %>

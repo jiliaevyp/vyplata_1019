@@ -1,0 +1,6 @@
+<!-- render for Tabel send_cardtabel_to_mail -->
+
+<%= form_tag(@controller_name, method: "get", class: "nifty_form", format: "buchtabel") do %>
+    <%= submit_tag("Отправить на почту by sassoft" ,name:"sassoft_send_cardtabel_to_mail",
+                       data: {confirm:'Отправить на адрес '+ @tabel.email + 'через https://api.sassoft.ru/notify ?', referral_code: "1234" },class: "submit" )%>
+<% end %>

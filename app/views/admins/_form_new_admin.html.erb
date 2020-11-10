@@ -1,0 +1,36 @@
+<!-- Form for Admin -->
+<%= form_for(@admin) do |f| %>
+  <% if @admin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
+
+      <ul>
+        <% @admin.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table border="1">
+    <caption><h3>Карта администратора</h3></caption>
+    <thead>
+    <tr>
+      <th>№</th>
+      <th>Наименование</th>
+      <th>Содержание</th>
+    </tr>
+    </thead>
+    <% n=0 %>
+    <tbody>
+    <tr> <td><%= n += 1 %></td> <td>Фамилия</td> <td align = "center">
+      <%= f.select :personal_id, options_from_collection_for_select(Personal.where(personal_admin: $personal_admin), :id, :title)%></td></tr>
+    <tr> <td><%= n += 1 %></td> <td>Пароль</td> <td align = "center">
+                  <%= f.text_field :password, :class => "input" %></td> </tr>
+    <tr> <td><%= n += 1 %></td> <td>Пароль</td> <td align = "center">
+      <%= f.password_field :password_confirmation, :class => "input" %></td> </tr>
+    </tbody>
+  </table>
+  <button class="button"> <%= f.submit("Сохранить") %></button><br>
+  <button class="button"><%= link_to 'Выход',admins_path %></button>
+<% end %>
+</div>

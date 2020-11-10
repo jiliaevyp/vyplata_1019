@@ -1,0 +1,6 @@
+<!-- render for Tabel umblock -->
+
+<%= form_tag(@controller_name, method: "get", class: "nifty_form", format: "time") do %>
+  <%= submit_tag("Запретить изменения" ,name:"umblock_time",
+                 data: {confirm:'Вы хотите закрыть табель?', referral_code: "1234" },class: "submit" )%>
+<% end %>

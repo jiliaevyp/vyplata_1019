@@ -1,0 +1,30 @@
+<!-- render for admin включение в пользователи -->
+<table border="1">
+  <caption><h3>Определение прав администратора<br> </h3></caption>
+  <thead>
+  <tr>
+    <th>№</th>
+    <th>Фамилия</th>
+    <th>Должность</th>
+    <th>Отдел</th>
+    <th>Эл.почта'</th>
+    <th>Пароль </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% num = 0 %>
+  <% unless @admins.nil? %>
+    <% @admins.each do |t| %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <td align="center"><%= num += 1 %></td>
+      <% @personal = Personal.find_by(id: t.personal_id) %>
+      <td><%= link_to @personal.title, admin_path(t) %></td>
+      <td align="left"><%= @personal.kadr  %></td>
+      <td align="left"><%= $otdel_long[@personal.num_otdel]  %></td>
+      <td align="left"><%= @personal.email  %></td>
+      <td align="center"><%= t.password %></td>
+    <% end %>
+  <% end %>
+    </tr>
+  </tbody>
+</table>

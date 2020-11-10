@@ -1,0 +1,42 @@
+
+<%= form_for @mond do |f| %>
+    <% if @mond.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@mond.errors.count, "error") %> prohibited this mond from being saved:</h2>
+          <ul>
+            <% @mond.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+<table border="1">
+  <caption><h3>Внесение изменений по текущему месяцу</h3></caption><br>
+  <thead>
+   <tr>
+    <th>№</th>
+    <th>Позиция</th>
+    <th>Значение</th>
+   </tr>
+  </thead>
+  <tbody>
+  <% n=0 %>
+  <tr class ='pasline'><td><%= n += 1 %></td> <td>Год</td><td align="center"><%= @mond.yahre %></td> </tr>
+  <tr class ='pasline'><td><%= n += 1 %></td> <td>Месяц</td><td align="center"><%= $monat_array[@mond.num_monat.to_i] %></td> </tr>
+  <tr>  <td><%= n += 1 %></td> <td><%= f.label :tag, "Рабочих дней" %></td>
+        <td align="center"><%= f.number_field :tag, min: 16, max: 22, :class => "input" %></td> </tr>
+  <tr>  <td><%= n += 1 %></td> <td><%= f.label :hour, "Рабочих часов" %></td>
+        <td align="center"><%= f.number_field :hour, min: 120, max: 176, default: 168, :class=>"input" %></td> </tr>
+  <tr>  <td><%= n += 1 %></td> <td><%= f.label :kfoberhour, "Коэф. сверхурочных" %></td>
+        <td align="center"><%= f.number_field :kfoberhour, min: 1.0, max: 3.0, default: 2.0, :class => "input"  %></td> </tr>
+  <tr>  <td><%= n += 1 %></td> <td><%= f.label :kfnalog, "Налог %" %></td>
+        <td align="center"><%= f.number_field :kfnalog, default: 13, min: 13, max: 35,:class => "input"  %></td> </tr>
+  <tr>  <td><%= n += 1 %></td> <td><%= f.label :procentsocial, "Социальный налог %" %></td>
+        <td align="center"><%= f.number_field :procentsocial, min: 20, max: 35,default: 24, :class=>"input" %></td> </tr>
+  <tr>  <td><%= n += 1 %></td> <td><%= label :block_mond, "Блокировка" %></td>
+        <td align="center"><%= f.select :block_mond, options_for_select($base_block),:class => "input"  %></td> </tr>
+ </tbody>
+</table><br>
+  <button class="button"><%= f.submit "Сохранить" %></button>
+<% end %>

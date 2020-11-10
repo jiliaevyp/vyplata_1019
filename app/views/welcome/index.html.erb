@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="container">
+    <div class="header">ООО "Геопласт Телеком"<br><h2>Начисление заработной платы</h2> </div>
+    <div class="sidebar">
+      <% if $glob_permition > 0 %>
+        <%= render('welcome/form_glob_sidebar') %>
+      <% else %>
+        <% if $admin %>
+          <%= render('form_sidebar') %>
+        <% else %>
+          <%= render('form_passiv_sidebar') %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="content">
+      <% if $glob_permition < 1 %>
+        <%= render('form_input_admin') %>
+      <% end %>
+
+    </div>
+   </div>
+</body>
+
+</html>

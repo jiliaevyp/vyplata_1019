@@ -1,0 +1,11 @@
+<!-- render for Tabel block/umblock -->
+
+<%= form_tag(@controller_name, method: "get", class: "nifty_form") do %>
+    <% if @mond.block_timetabel == 1 %>
+    <li><%= submit_tag("Открыть табель",name:"commit_open_timetabel",
+                           data: {confirm:'Открыть табель?',referral_code: "1234" })%></li>
+    <% else %>
+    <li><%= submit_tag("Закрыть табель" , name:"commit_close_timetabel",
+                           data: {confirm:'Закрыть табель?'})%></li>
+    <% end %>
+<% end %>

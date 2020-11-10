@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  adminlevel: 9.99
+  controller: MyString
+  action: MyString
+  views: MyString
+  params: MyString
+
+two:
+  email: MyString
+  adminlevel: 9.99
+  controller: MyString
+  action: MyString
+  views: MyString
+  params: MyString

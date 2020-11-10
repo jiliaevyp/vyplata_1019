@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создание персональной карты сотрудника</title>
+  </head>
+<body>
+<div class="container">
+
+  <div class="header">Начисление заработной платы<br>ООО "Геопласт Телеком"</div>
+
+  <div class="sidebar">
+    <% if $glob_permition >0 %>
+      <%=render('welcome/form_glob_sidebar') %>
+    <% else %>
+      <%= render('welcome/form_sidebar') %> </div>
+    <% end %>
+    </div>
+
+<div class="content_1_col">
+     <%= render 'form_edit_personal' %><br>
+  <button class="button"><%= link_to 'Выход', personals_path %> </button>
+
+</div>
+</div>
+<div class="footer"></div>
+</body>
+</html>
+
+

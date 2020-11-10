@@ -1,0 +1,36 @@
+<!-- render for show personal -->
+<table border="1">
+  <h2><div class="caption">Персональная карта сотрудника<br></h2>
+
+ <thead>
+  <tr>
+    <th>№</th><th>Пункт карты</th><th>Содержание</th>
+    <% n = 0 %>
+  </tr>
+ </thead>
+ <tbody>
+  <tr> <td><%= n += 1 %></td> <td>Фамилия:</td> <td align="center"><%= @personal.title %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Имя</td><td align="center"><%= @personal.forname %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Отчество</td><td align="center"><%= @personal.fornametwo %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Должность</td> <td align="center"><%= @personal.kadr %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Отдел</td> <td align="center"><%= $otdel_long[@personal.num_otdel.to_i] %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Тариф (руб/час)</td><td align="center"><%= @personal.tarifhour %></td>
+  <tr> <td><%= n += 1 %></td> <td>Дата приема</td><td align="center"><%= @personal.begdata %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Ценность</td><td align="center"><%= @personal.werte %></td>
+  <tr> <td><%= n += 1 %></td> <td>Образование</td><td align="center"><%= @personal.bilding %></td>
+  <tr> <td><%= n += 1 %></td> <td>День рождения</td><td align="center"><%= @personal.borndata %></td>
+  <tr> <td><%= n += 1 %></td> <td>Семейное положение</td><td align="center"><%= @personal.familie %></td>
+  <tr> <td><%= n += 1 %></td> <td>Наличие детей</td><td align="center"><%= @personal.kinder %></td>
+  <tr> <td><%= n += 1 %></td> <td>Наличие жилья</td><td align="center"><%= @personal.haus %></td>
+  <tr> <td><%= n += 1 %></td> <td>Адрес регистрации</td><td align="center"><%= @personal.address %></td>
+  <tr> <td><%= n += 1 %></td> <td>Адрес проживания</td><td align="center"><%=  %></td>
+  <tr> <td><%= n += 1 %></td> <td>Телефон</td><td align="center"><%= @personal.tel %></td>
+  <tr> <td><%= n += 1 %></td> <td>Эл. почта</td><td align="center"><%= @personal.email %></td>
+  <tr> <td><%= n += 1 %></td> <td>В штате</td><td align="center"><%= $real_word[@personal.real] %></td>
+  <tr> <td><%= n += 1 %></td> <td>Доп сведения</td><td align="center"><%= @personal.information %></td>
+  <% if $glob_permition >0 %>
+    <tr> <td><%= n += 1 %></td> <td>Администратор</td><td align="center"><%= $administrator[@personal.personal_admin.to_i] %></td>
+  <% end %>
+  <tr> <td><%= n += 1 %></td> <td>Последнее изменение</td><td align="center"><%= @personal.updated_at %></td></tr>
+ </tbody>
+</table>

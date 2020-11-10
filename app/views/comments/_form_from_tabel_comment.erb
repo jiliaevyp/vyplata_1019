@@ -1,0 +1,22 @@
+<!-- render for begin for new show edit comment -->
+<table border="1">
+  <caption>
+      <h3>Деловая активность<br>
+        <%=  @personal.title %><br>
+        <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %></h3>
+    Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %>
+  </caption>
+
+  <thead></thead>
+  <% n = 0 %>
+  <tbody>
+  <tr> <td><%= n += 1 %></td> <td>Должность</td><td align = "center"><%= @tabel.kadr %></td> </tr>
+  <tr> <td><%= n += 1 %></td> <td>Отдел</td><td align = "center"><%= $otdel_long[@tabel.num_otdel.to_i] %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Отработано дней:</td> <td align = "center"><%= @tabel.tagemach %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Отработано часов:</td> <td align = "center"><%= @tabel.hourmach %></td></tr>
+  <tr> <td><%= n += 1 %></td> <td>Сверхурочных часов:</td> <td align = "center"><%= @tabel.oberhour %></td>
+  <tr><td> <%= n += 1 %></td> <td>Командировки (дни)</td><td align ="center">    <%= @tabel.reisetage %></td> </tr>
+  <tr><td><%=  n += 1 %></td> <td>Отпуск (дни)</td><td align ="center">          <%= @tabel.urlaub %></td> </tr>
+  <tr><td><%=  n += 1 %></td> <td>Больничный (дни)</td><td align ="center">      <%= @tabel.krankentage %></td> </tr>
+  </tbody>
+</table>

@@ -1,0 +1,29 @@
+<!-- form for globaladmin sidebar -->
+
+<h2> Текущий месяц:<br>
+<% if $jetzt_yahre != nil %>
+    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %>
+<% else %>
+    <strong> Рабочий год и месяц не выбраны!</strong>
+<% end %><br>
+</h2>
+
+  <% if params[:controller] == "monds" %>
+    <p><div class="passiv_button_sidebar">Выбор месяца</div></p>
+  <% else %>  <p><a> <%= link_to 'Выбор месяца', monds_path  %> </a></p>
+  <% end %>
+  <% if params[:controller] == "personals"%>
+    <p><div class="passiv_button_sidebar">Сотрудники</div></p>
+  <% else %><p><a><%= link_to 'Сотрудники', personals_path %></a></p></font>
+  <% end %>
+  <p>Табель</p>
+  <p>Отзывы</p>
+  <p>Начисление</p>
+  <p>Ведомость</p>
+  <% if params[:controller] =="admins" || params[:controller]=="levels" || params[:controller]=="personals" || $flag_for_admin== 0 %>
+    <p><div class="passiv_button_sidebar">Администраторы</div></p>
+  <% else %>  <p><a <%= link_to 'Администраторы', admins_path %></a></p>
+  <% end %>
+  <p><a <%= link_to 'Выход', welcome_index_path(format:"exit"),
+                    data: {confirm:'Вы действительно хотите закончить сессию?' } %></a></p>
+</strong></h2>

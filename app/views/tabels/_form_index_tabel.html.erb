@@ -1,0 +1,75 @@
+<!--render for tabel/index -->
+
+<table border="1" >
+  <caption>
+    <h3>Начисление<br>
+    <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %> <br>
+    Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %><br></h3>
+    <% if @access_all_otdel > 0 %>Все отделы
+    <% else %><%= $otdel_long[@real_admin.num_otdel.to_i] %> отдел<% end %>
+  </caption>
+  <thead>
+  <tr>
+    <th align="center">№</th>
+    <th align="center"><%=  link_to 'Фамилия', tabels_path(format: $format_tabel, sort_by_name: "1")  %></th>
+    <th align="center"><%=  link_to 'Должность', tabels_path(format: $format_tabel, sort_by_kadr: "1")  %></th>
+    <% if @access_all_otdel > 0 %> <th align="center"><%=  link_to 'Отдел', tabels_path(format: $format_tabel, sort_by_otdel: "1")  %></th><% end %>
+    <th align="center">Тариф (руб/ч)</th>
+    <th align="center">Отработано(ч)</th>
+    <th align="center">Доп.часы</th>
+    <th align="center">Командировка</th>
+    <th align="center">Оклад </th>
+    <th align="center">Надбавка</th>
+    <th align="center">Премия</th>
+    <th align="center">Всего</th>
+  </tr>
+  </thead>
+  <%num = 0 %>
+  <tbody>
+  <% @tabels.each do |f| %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <td align="center"><%= num += 1 %></td>
+      <% if f.oklad > 0 %>
+      <td align="left">  <%= link_to f.title, tabel_path(f, params[:format])  %></td>
+      <% else %>
+        <td align="left"><%= f.title %></td>
+      <% end %>
+      <td align="left">  <%= f.kadr %></td>
+      <% if @level.access_all_otdel > 0 %><td align="left"><%= $otdel_long[f.num_otdel.to_i] %></td><% end %>
+      <td align="center"><%= f.tarifhour    %></td>
+      <% if f.oklad > 0 %>
+      <td align="center"><%= f.hourmach     %></td>
+      <td align="center"><%= f.oberhour     %></td>
+      <td align="center"><%= f.reisetage %></td>
+      <td align="right"> <%= sprintf("%0.02f", f.oklad)       %></td>
+      <td align="right"> <%= sprintf("%0.02f", f.nadbavka)     %></td>
+      <td align="right"> <%= sprintf("%0.02f", f.bonus)       %></td>
+      <td align="right"> <%= sprintf("%0.02f", f.summa )       %></td>
+      <% else %>
+      <td align="center" colspan= "7"> <%= link_to 'Для расчетов необходимо заполнить табель рабочего времени!',
+                                                  tabels_path(format: $format_time) %></td>
+      <% end %>
+  <% end %>
+  </tr>
+  <%if @tabels %>
+    <tr>
+      <td align="center"><%= num += 1 %></td>
+      <td>Итого</td>
+      <td></td>
+      <% if @level.access_all_otdel > 0 %><td></td><% end %>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td align="right"> <%= sprintf("%0.02f", @sumoklad) %>   </td>
+      <td align="right"> <%= sprintf("%0.02f", @sumnadbavka) %></td>
+      <td align="right"> <%= sprintf("%0.02f", @sumbonus) %>   </td>
+      <td align="right"> <%= sprintf("%0.02f", @summa) %>      </td>
+
+    </tr>
+  <%end %>
+    </tr>
+  </tbody>
+</table>
+
+

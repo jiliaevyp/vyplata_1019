@@ -1,0 +1,46 @@
+<!-- form edit level  -->
+<%= form_for(@level) do |f| %>
+    <% if @level.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@level.errors.count, "error") %> prohibited this admin_level from being saved:</h2>
+
+          <ul>
+            <% @level.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <table border="1">
+      <caption><h2>
+        Администратор <br>
+        <%= @personal.title  %>
+        <%= @admin.email  %></h2>
+        <h2>Доступ к странице </h2>
+        <h1><%= $level_index_controller[@level.access_controller] %></h1>
+      </caption>
+
+      <tbody>
+      <% n=0 %>
+      <tr class ='pasline'> <td><%= n += 1 %></td> <th>Страница</th><th align="center"><%= @level.access_controller %></th> </tr>
+      <tr> <td><%= n += 1 %></td> <td> Блокировка страницы</td>      <td align = "center"><%= f.select :access_full, $access_select %></td></tr>
+    <% unless @level.access_controller == "monds" %>
+      <tr> <td><%= n += 1 %></td> <td>Доступ ко всем отделам</td> <td align = "center"><%= f.select :access_all_otdel, $access_select %></td></tr>
+    <%end %>
+    <% if @level.access_controller == $tabels %>
+      <tr> <td><%= n += 1 %></td> <td>Страница</td>    <td align = "center"><%= f.select :format, $format_select %></td></tr>
+    <%end %>
+
+      <tr> <td><%= n += 1 %></td> <td>Доступ к таблице</td>     <td align = "center"><%= f.select :access_index, $access_select %></td></tr>
+      <tr> <td><%= n += 1 %></td> <td>Просмотр</td>      <td align = "center"><%= f.select :access_show,  $access_select %></td></tr>
+      <tr> <td><%= n += 1 %></td> <td>Изменение</td>      <td align = "center"><%= f.select :access_edit,  $access_select %></td></tr>
+    <% if @level.access_controller == "monds" || @level.access_controller == $personals || @level.access_controller == $comments %>
+      <tr> <td><%= n += 1 %></td> <td>Новая запись</td>       <td align = "center"><%= f.select :access_new,   $access_select %></td></tr>
+      <tr> <td><%= n += 1 %></td> <td>Удаление</td>    <td align = "center"><%= f.select :access_del,   $access_select %></td></tr>
+    <% end %>
+      <tr> <td><%= n += 1 %></td> <td>Печать</td>     <td align = "center"><%= f.select :access_print, $access_select %></td> </tr>
+      <tr> <td><%= n += 1 %></td> <td>Эл.почта</td>     <td align = "center"><%= f.select :access_email, $access_select %></td> </tr>
+      </tbody>
+    </table><br>
+  <button class="button"> <%= f.submit("Сохранить") %></button><br>
+<% end %>

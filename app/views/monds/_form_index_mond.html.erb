@@ -1,0 +1,48 @@
+
+<table border="1">
+  <caption>
+    <h3>Сведения по месяцам<br>
+      <%= $jetzt_yahre %> год<br>
+      </h3>
+  </caption>
+    <thead>
+    <tr>
+      <th>Год</th>
+      <th>Месяц</th>
+      <th>Рабочих дней</th>
+      <th>Рабочих часов</th>
+      <th>Коэф. сверхурочных</th>
+      <th>Налог %</th>
+      <th>Соц.налог %</th>
+      <th>Блокировка</th>
+      <th>Удаление</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @monds %>
+      <% @monds.each do |t| %>
+        <% monat =  $monat_array[t.num_monat] %>
+        <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+          <td align="center"><%= t.yahre %></td>
+          <td align="left"> <%= link_to monat, (t) %></td>
+          <td align="center"><%= t.tag %></td>
+          <td align="center"><%= t.hour %></td>
+          <td align="center"><%= t.kfoberhour %></td>
+          <td align="center"><%= t.kfnalog %></td>
+          <td align="center"><%= t.procentsocial %></td>
+          <% if t.close_update == 1 %>
+            <td align="center">Блокирован</td>
+          <% else %>
+            <td align="center">Открыт</td>
+          <% end %>
+          <% if $glob_permition > 0 || @access_del > 0%>
+          <td><%= link_to 'Удалить',  t, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+          <% else %>
+              <td align="center"> Удалить</td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+</table>
+<br>

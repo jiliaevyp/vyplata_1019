@@ -1,0 +1,34 @@
+<html>
+<head>
+  <title>Просмотр карты пользователя</title>
+</head>
+<body>
+<div class="container">
+  <div class="header">Начисление заработной платы<br> ООО "Геопласт Телеком" </div>
+
+  <div class="sidebar">
+    <% if $glob_permition >0 %>
+      <%=render('welcome/form_glob_sidebar') %>
+    <% end %>
+    </div>
+
+  <div class="content">
+    <% if $glob_permition > 0 %>
+      <%= render 'form_show_admin' %><br>
+      <strong>
+      <li><%= link_to 'Доступ к страницам', levels_path(format:@admin.id, focus:"true")  %></li>
+      <li><%= link_to 'Изменить', edit_admin_path(@admin), focus:"false" %><br></li>
+      <li><%= link_to 'Удалить', @admin, method: :delete, data:
+                { confirm: 'Удалить пользователя, Вы уверены?' } %><br></li>
+      </strong><br>
+        <button class="button" ><%= link_to 'Выход', admins_path %></button>
+    <% else %>
+      <h1><%= link_to 'Вас нет доступа!', welcome_index_path(format: "begin") %></h1>
+    <% end %>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

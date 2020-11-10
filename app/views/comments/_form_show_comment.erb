@@ -1,0 +1,15 @@
+
+<table border="1">
+  <caption><h3> Отзыв на сотрудника<br>
+    <%=  @personal.title %><br>
+  <%= $monat_array[$jetzt_num_monat.to_i] %>   <%= $jetzt_yahre %>
+  </h3></caption>
+  <thead>
+  <th>Автор</th><th align = "center"><%= @comment.commenter_title %></th>
+  </thead>
+  <tbody>
+  <tr> <td>Отзыв</td><td  align = "left" body = "size: "50x4"><%= @comment.body %></td> </tr>
+  <tr> <td>Оценка</td><td align = "center"><%= @comment.plunus %></td> </tr>
+  <tr> <td>Дата создания</td><td align = "left"><%= @comment.data %></td> </tr>
+  </tbody>
+</table><br>

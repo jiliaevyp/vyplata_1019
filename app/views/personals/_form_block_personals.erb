@@ -1,0 +1,11 @@
+<!-- render for Personal.real block/umblock -->
+
+<%= form_tag(@controller_name, method: "get", class: "nifty_form") do %>
+  <% if @mond.block_personal == 1 %>
+    <li><%= submit_tag("Разрешить изменения",name:"commit_open",
+                           data: {confirm:'Разрешить изменения в базе персонала?',referral_code: "1234" })%></li>
+  <% else %>
+    <li><%= submit_tag("Запретить изменения" , name:"commit_close",
+                           data: {confirm:'Запретить изменения в базе персонала?'})%></li>
+  <% end %>
+<% end %>

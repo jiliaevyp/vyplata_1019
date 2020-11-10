@@ -1,0 +1,42 @@
+<!-- render for show @buchtabel -->
+<table border="1">
+  <caption> <h3>Карта ведомости <br>
+    <%= @tabel.title %><br>
+    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3></caption>
+  <tbody>
+  <% num = 0 %>
+  <tr> <td><%=num += 1 %></td> <td>Должность</td> <td align="center">              <%= @tabel.kadr %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Отдел</td> <td align = "center"><%= $otdel_long[@tabel.num_otdel.to_i] %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Почасовая</td> <td align ="right">       <%= sprintf("%0.02f руб", @tabel.tarifhour) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>В месяце рабочих дней</td> <td align = "center">         <%= @tabel.tag %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>В месяце рабочих часов</td> <td align = "center">        <%= @tabel.hour %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Коэф. сверхурочных</td> <td align ="center">    <%= @tabel.kfoberhour %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Отработано (дни)</td> <td align ="center">     <%= @tabel.tagemach %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Отработано (часы)</td> <td align ="center">    <%= @tabel.hourmach %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Сверхурочные(часы)</td> <td align ="center"><%= @tabel.oberhour %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Командировки (дни)</td> <td align ="center">   <%= @tabel.reisetage %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Начислено </td> <td align ="right">         <%= sprintf("%0.02f руб", @tabel.hourgeld) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>За сверхурочные</td> <td align ="right"> <%= sprintf("%0.02f руб", @tabel.oberhourgeld) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>За командировки</td> <td align ="right">         <%= sprintf("%0.02f руб", @tabel.reisegeld) %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Оклад</td> <td align ="right"> <%= sprintf("%0.02f руб", @tabel.oklad) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Надбавка</td> <td align ="right"><%= sprintf("%0.02f руб", @tabel.nadbavka) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Премия  </td> <td align = "center">         <%= sprintf("0 %", @tabel.proc_bonus) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Премия</td><td align ="right"><%= sprintf("%0.02f руб", @tabel.bonus) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Премия</td><td align ="right"><%= sprintf("%0.02f руб", @tabel.summa) %></td></tr>
+  <tr> <td><%=num += 1 %></td> <td>Отпускные</td> <td align ="right">         <%= sprintf("%0.02f руб",@tabel.urlaubgeld) %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Больничные</td> <td align ="right">     <%= sprintf("%0.02f руб",@tabel.krankengeld) %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Вычтено</td> <td align ="right">     <%= sprintf("%0.02f руб",@tabel.minus) %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Причина вычета</td> <td align ="left">     <%= @tabel.textminus %></td> </tr>
+  <tr> <td><%=num += 1 %></td> <td>Всего начислено</td> <td align="right">         <%= sprintf("%0.02f руб", @tabel.vsego) %></td> </tr>
+  <tr><td><%= num += 1 %></td> <td>Подоходный налог <%= @tabel.kfnalog %>%</td>
+    <td align = "right"><%= sprintf("%0.02f руб", @tabel.nalog) %></td> </tr>
+  <tr><td><%= num += 1 %></td> <th align = "left" >К получению</th>
+    <th align = "right"><%= sprintf("%0.02f руб", @tabel.naruki) %></th> </tr>
+  </tbody>
+</table>
+<div>
+  <p><strong> Директор                                     Жиляев Ю.  </strong></p>
+  <p><strong> Главный бухгалтер                            Лазарева Е. </strong></p>
+</div>
+
+

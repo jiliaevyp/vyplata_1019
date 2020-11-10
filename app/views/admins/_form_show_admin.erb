@@ -1,0 +1,18 @@
+<!-- render for show admin -->
+<table border="1">
+  <caption><h3>Карта пользователя
+     <align = "left"><%= @personal.title  %></h3>
+  </caption>
+ <thead>
+  <tr>
+    <th>№</th>
+    <th>Пункт карты</th>
+    <th>Содержание</th>
+    <% n = 0 %>
+  </tr>
+ </thead>
+ <tbody>
+  <tr> <td><%= n += 1 %></td> <td>Эл. почта</td><td align="center"><%= @personal.email %></td>
+  <tr> <td><%= n += 1 %></td> <td>Пароль</td><td align="center"><%= @admin.password %></td>
+ </tbody>
+</table>

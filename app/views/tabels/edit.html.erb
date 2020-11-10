@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Редактирование карты табеля</title></head>
+<body>
+<div class="container">
+  <div class="header">Начисление заработной платы<br> ООО "Геопласт Телеком" </div>
+  <div class="sidebar"><%= render('welcome/form_sidebar') %> </div>
+  <div class="content_1_col">
+    <% case  params[:format]%>
+    <% when $format_time %>
+      <%= render 'form_edit_time' %>
+    <% when $format_tabel %>
+      <%= render 'form_edit_tabel' %>
+    <% when $format_buchtabel %>
+      <%= render 'form_edit_buchtabel' %>
+    <% else %>
+      <h3> Нет доступа!</h3>
+    <%end %>
+  </div>
+  <% if params[:format] == $format_tabel %>
+    <div class="content_2_col"><%= render 'comments/form_show_comments' %><br></div>
+  <% end %>
+</div>
+</body>
+</html>

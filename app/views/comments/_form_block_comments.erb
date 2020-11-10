@@ -1,0 +1,11 @@
+<!-- render for comments block/umblock -->
+
+<%= form_tag(@controller_name, method: "get", class: "nifty_form") do %>
+  <% if @mond.block_comment == 1 %>
+    <button class="button"><%= submit_tag("Открыть комментарии", name:"block",value: @commit_open,
+             data: {confirm:'У вас есть доступ?',referral_code: "1234" })%></button>
+  <% else %>
+    <button class="button"><%= submit_tag("Закрыть комментарии" , name:"block", value: @commit_close,
+            data: {confirm:'Вы хотите закрыть комментарии?'})%></button>
+  <% end %>
+<% end %>

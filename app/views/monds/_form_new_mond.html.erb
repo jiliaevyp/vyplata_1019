@@ -1,0 +1,41 @@
+<!-- form new mond  -->
+<%= form_for @mond do |f| %>
+    <% if @mond.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@mond.errors.count, "error") %> prohibited this mond from being saved:</h2>
+          <ul>
+            <% @mond.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+<table border="1">
+  <div class = "caption" >Новый месяц<br><br>
+  <thead>
+   <tr>
+    <th>№</th><th>Позиция</th><th>Значение</th>
+   </tr>
+  </thead>
+  <tbody>
+      <tr> <td>1</td> <td><%= f.label :yahre, "Год" %></td>
+           <td align="center"><%= f.number_field :yahre, min: 2020, required:true, :class => "input" %></td> </tr>
+      <tr> <td>1</td> <td><%= f.label :num_monat, "Месяц" %></td>
+           <td align="center"><%= f.select :num_monat, options_for_select($monds), :class => "input" %></td> </tr>
+      <tr> <td>1</td> <td><%= f.label :tag, "Рабочих дней" %></td>
+           <td align="center"><%= f.number_field :tag, min: 16, max: 22, :class => "input" %></td> </tr>
+      <tr> <td>2</td> <td><%= f.label :hour, "Рабочих часов" %></td>
+           <td align="center"><%= f.number_field :hour, min: 120, max: 176, default: 168, :class=>"input" %></td> </tr>
+      <tr> <td>3</td> <td><%= f.label :kfoberhour, "Коэф. сверхурочных" %></td>
+           <td align="center"><%= f.number_field :kfoberhour, min: 1.0, max: 3.0, default: 2.0, :class => "input"  %></td> </tr>
+      <tr> <td>4</td> <td><%= f.label :kfnalog, "Налог %" %></td>
+           <td align="center"><%= f.number_field :kfnalog, default: 13, min: 13, max: 35,:class => "input"  %></td> </tr>
+      <tr> <td>5</td> <td><%= f.label :procentsocial, "Социальный налог %" %></td>
+           <td align="center"><%= f.number_field :procentsocial, min: 20, max: 35,default: 24, :class=>"input" %></td> </tr>
+      <tr> <td>6</td> <td><%= label :block_mond, "Блокировка" %></td>
+        <td align="center"><%= f.select :block_mond, options_for_select($base_block),:class => "input"  %></td> </tr>
+ </tbody>
+</table><br>
+  <submit><%= f.submit "Сохранить" %></submit>
+<% end %>
