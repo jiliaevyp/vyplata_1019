@@ -1,7 +1,7 @@
 class TabelsController < ApplicationController
   before_action :set_tabel, only: [:show, :edit, :update, :destroy]
   before_action :checkadmin
-  rescue_from Tabel::NoMethodError, with: :tabel_nometod_error
+  #rescue_from Tabel::NoMethodError, with: :tabel_nometod_error
     # GET /tabels
   # GET /tabels.json
   def index
@@ -13,7 +13,7 @@ class TabelsController < ApplicationController
     if @sort_by_name.nil? && @sort_by_otdel.nil? && @sort_by_kadr.nil?
       @sort_by_name = "1"
     end
-    #abort params.inspect
+    #abort @access_print.inspect
     if @mond.nil? == false         # проверяем что есть запись Mond
       if @access_all_otdel > 0
         case "1"
@@ -37,35 +37,35 @@ class TabelsController < ApplicationController
 
   end
 
-  # GET /tabels/1
-  # GET /tabels/1.json
-  # просмотр карты табеля       params[:format]==$format_time
-  # просмотр карты начисления   params[:format]==$format_tabel
-  # просмотр карты ведомости    params[:format]==$format_buchtabel
+    # GET /tabels/1
+    # GET /tabels/1.json
+    # просмотр карты табеля       params[:format]==$format_time
+    # просмотр карты начисления   params[:format]==$format_tabel
+    # просмотр карты ведомости    params[:format]==$format_buchtabel
   def show
     @tabel      = Tabel.find(params[:id])
     @mond       = Mond.find(@tabel.mond_id)
-    @personal   = Personal.find(@tabel.personal_id)       # добавить поле tabel_id in Comment
+    @personal   = Personal.find_by(id: @tabel.personal_id)       # добавить поле tabel_id in Comment
     @comments   = Comment.where(mond_id: @mond.id, personal_id: @tabel.personal_id)
     calc_tabel
     send_cardtabel_to_mail
     sassoft_send_cardtabel_to_mail
   end
-  # GET /tabels/new
-  #def new
-  #level_record
-  #@mond         = Mond.find(@tabel.mond_id)
-  #@personal   = Personal.find(@tabel.personal_id)       # добавить поле tabel_id in Comment
-  #@comments   = Comment.where(mond_id: @mond.id, personal_id: @tabel.personal_id)
-  #@tabel        = Tabel.new
-  #end
+    #GET /tabels/new
+  def new
+    @tabel        = Tabel.new
+    #@mond         = Mond.find(@tabel.mond_id)
+    #@personal   = Personal.find(@tabel.personal_id)       # добавить поле tabel_id in Comment
+    #@comments   = Comment.where(mond_id: @mond.id, personal_id: @tabel.personal_id)
+  end
 
-  # GET /tabels/1/edit
+    # GET /tabels/1/edit
   def edit
     @tabel      = Tabel.find(params[:id])
     $params = params[:format]
     @mond       = Mond.find(@tabel.mond_id)
-    @personal   = Personal.find(@tabel.personal_id)       # добавить поле tabel_id in Comment
+    @personal   = Personal.find_by(id: @tabel.personal_id)       # добавить поле tabel_id in Comment
+
     @comments   = Comment.where(mond_id: @mond.id, personal_id: @tabel.personal_id)
     @sumplunus = @comments.sum(:plunus)
     @count_plunus = @comments.count
@@ -76,28 +76,31 @@ class TabelsController < ApplicationController
     end
   end
 
-  # POST /tabels
-  # POST /tabels.json
+    # POST /tabels
+    # POST /tabels.json
   def create
-    @personal   = Personal.find(@tabel.personal_id)
-    @mond       = Mond.find(@tabel.mond_id)
-    Tabel.where(personal_id: @personal.id, mond_id: @mond.id).delete_all #уничтожение в Tabel старые записи
     @tabel      = Tabel.new(tabel_params)
-    calc_tabel
-    @tabel.save
-    respond_to do |format|
-      if @tabel.save
-        format.html { redirect_to tabel_path(@tabel), notice: 'Карта табеля успешно создана' }
-        format.json { render :show, status: :created, location: tabel_path(@tabel) }
-      else
-        format.html { redirect_to  new_tabel_path(@tabel)}
-        format.json { render json: @tabel.errors, status: :unprocessable_entity }
+    #@personal   = Personal.find(@tabel.personal_id)
+    @mond       = Mond.find_by(mond_id: @mond.id, yahre: $jetzt_yahre)
+    @tabel_old  = Tabel.find_by(personal_id: @personal.id, mond_id: @mond.id, yahre: $jetzt_yahre ) #проверка на сущ запись
+    unless @tabel_old
+      add_tabel
+      calc_tabel
+      @tabel.save
+      respond_to do |format|
+        if @tabel.save
+          format.html { redirect_to tabel_path(@tabel), notice: 'Карта табеля успешно создана' }
+          format.json { render :show, status: :created, location: tabel_path(@tabel) }
+        else
+          format.html { redirect_to  new_tabel_path(@tabel)}
+          format.json { render json: @tabel.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
-  # PATCH/PUT /tabels/1
-  # PATCH/PUT /tabels/1.json
+    # PATCH/PUT /tabels/1
+    # PATCH/PUT /tabels/1.json
   def update
     @tabel     = Tabel.find(params[:id])
     @personal  = Personal.find(@tabel.personal_id)
@@ -109,15 +112,15 @@ class TabelsController < ApplicationController
         calc_tabel
         @tabel.save
         case  $params
-          when $format_time
-            format.html { redirect_to tabel_path(@tabel,format: $format_time), notice: 'Карта начисления сохранена' }
-            format.json { render :show, status: :ok, location: @tabel }
+        when $format_time
+          format.html { redirect_to tabel_path(@tabel,format: $format_time), notice: 'Карта начисления сохранена' }
+          format.json { render :show, status: :ok, location: @tabel }
         when $format_tabel
-            format.html { redirect_to tabel_path(@tabel,format: $format_tabel), notice: 'Карта начисления сохранена' }
-            format.json { render :show, status: :ok, location: @tabel }
+          format.html { redirect_to tabel_path(@tabel,format: $format_tabel), notice: 'Карта начисления сохранена' }
+          format.json { render :show, status: :ok, location: @tabel }
         when $format_buchtabel
-            format.html { redirect_to tabel_path(@tabel,format: $format_buchtabel), notice: 'Карта начисления сохранена' }
-            format.json { render :show, status: :ok, location: @tabel }
+          format.html { redirect_to tabel_path(@tabel,format: $format_buchtabel), notice: 'Карта начисления сохранена' }
+          format.json { render :show, status: :ok, location: @tabel }
         end
       else
         case  $params
@@ -135,8 +138,8 @@ class TabelsController < ApplicationController
     end
   end
 
-  # DELETE /tabels/1
-  # DELETE /tabels/1.json
+    # DELETE /tabels/1
+    # DELETE /tabels/1.json
   def destroy
     @tabel  = Tabel.find(params[:id])
     @tabel.destroy
@@ -144,6 +147,44 @@ class TabelsController < ApplicationController
       format.html { redirect_to tabels_url, notice: 'Карта начисления удалена' }
       format.json { head :no_content }
     end
+  end
+  def add_tabel               #добавление нового табеля
+    @tabel.personal_id   = @personal.id
+    @tabel.title         = @personal.title
+    @tabel.kadr          = @personal.kadr
+    @tabel.email         = @personal.email
+    @tabel.num_otdel     = @personal.num_otdel
+    @tabel.tarifhour     = @personal.tarifhour
+    @tabel.mond_id       = @mond.id
+    @tabel.kfnalog       = @mond.kfnalog
+    @tabel.num_monat     = @mond.num_monat
+    @tabel.yahre         = @mond.yahre
+    @tabel.tag           = @mond.tag
+    @tabel.hour          = @mond.hour
+    @tabel.kfoberhour    = @mond.kfoberhour
+    @tabel.procentsocial = @mond.procentsocial
+    @tabel.tagemach       = 0
+    @tabel.hourmach       = 0
+    @tabel.oberhour       = 0
+    @tabel.reisetage      = 0
+    @tabel.hourgeld       = 0
+    @tabel.oberhourgeld   = 0
+    @tabel.oklad          = 0
+    @tabel.proc_bonus     = 0
+    @tabel.bonus          = 0
+    @tabel.nadbavka       = 0
+    @tabel.reisegeld      = 0
+    @tabel.urlaub         = 0
+    @tabel.urlaubgeld     = 0
+    @tabel.krankengeld    = 0
+    @tabel.gehalt         = 0
+    @tabel.textminus      = ' '
+    @tabel.vsego          = 0
+    @tabel.summa          = 0
+    @tabel.nalog          = 0
+    @tabel.naruki         = 0
+    @tabel.social         = 0
+    @tabel.save
   end
 
   def calc_tabel      #вычисления
@@ -182,20 +223,20 @@ class TabelsController < ApplicationController
     end
   end
 
-  # обработка кнопки отправки карты по  адресу Personal.mail  через UserMailer
+    # обработка кнопки отправки карты по  адресу Personal.mail  через UserMailer
   def send_cardtabel_to_mail
     @tabel  = Tabel.find(params[:id])
     @mond   = Mond.find(@tabel.mond_id)
     @mail_commit  = params[:send_cardtabel_to_mail]
     if @mail_commit.nil? == false
       respond_to do |format|
-      UserMailer.welcome_email(@tabel).deliver_now
+        UserMailer.welcome_email(@tabel).deliver_now
         format.html { redirect_to tabel_path(@tabel, format:"buchtabel"), notice: 'Карта отправлена на  '+ @tabel.email+'  через UserMailer'}
-     end
+      end
     end
   end
-  #
-  # обработка кнопки отправки карты по  адресу @tabel.email
+    #
+    # обработка кнопки отправки карты по  адресу @tabel.email
   def sassoft_send_cardtabel_to_mail
     @tabel  = Tabel.find(params[:id])
     @mond   = Mond.find(@tabel.mond_id)
@@ -234,9 +275,9 @@ class TabelsController < ApplicationController
     <table border>
     caption> <h3>Карта ведомости <br>"+ @tabel.title+"<br>"+ $monat_array[$jetzt_num_monat.to_i]+ "  "+ $jetzt_yahre + "</h3></caption>"+
         + "<tbody>"+
-  "Должность    " + @tabel.kadr+"<br"+
-  "Отдел        " +$otdel_long[@tabel.num_otdel.to_i]+ "<br>"+
-  "Почасовая    "+sprintf("%0.02f руб", @tabel.tarifhour)+"<br>"+
+        "Должность    " + @tabel.kadr+"<br"+
+        "Отдел        " +$otdel_long[@tabel.num_otdel.to_i]+ "<br>"+
+        "Почасовая    "+sprintf("%0.02f руб", @tabel.tarifhour)+"<br>"+
         "</tbody> + </table>" + "</body>"+"</html>"
 
   end

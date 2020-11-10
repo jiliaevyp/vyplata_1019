@@ -12,6 +12,7 @@
   <tr>
     <th align="center">№</th>
     <th align="center"><%=  link_to 'Фамилия', tabels_path(format: $format_tabel, sort_by_name: "1")  %></th>
+    <th align="center">Имя</th>
     <th align="center"><%=  link_to 'Должность', tabels_path(format: $format_tabel, sort_by_kadr: "1")  %></th>
     <% if @access_all_otdel > 0 %> <th align="center"><%=  link_to 'Отдел', tabels_path(format: $format_tabel, sort_by_otdel: "1")  %></th><% end %>
     <th align="center">Тариф (руб/ч)</th>
@@ -34,6 +35,8 @@
       <% else %>
         <td align="left"><%= f.title %></td>
       <% end %>
+      <% @personal = Personal.find_by(id: f.personal_id) %>
+      <td align="left"><%= @personal.forname %></td>
       <td align="left">  <%= f.kadr %></td>
       <% if @level.access_all_otdel > 0 %><td align="left"><%= $otdel_long[f.num_otdel.to_i] %></td><% end %>
       <td align="center"><%= f.tarifhour    %></td>
@@ -57,6 +60,7 @@
       <td>Итого</td>
       <td></td>
       <% if @level.access_all_otdel > 0 %><td></td><% end %>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>

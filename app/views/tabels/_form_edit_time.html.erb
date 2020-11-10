@@ -14,7 +14,7 @@
 <%= form_for(@tabel) do |f| %>
     <table border="1">
       <caption> <h3>Карта табеля <br>
-        <%= @tabel.title %><br>
+        <%= @tabel.title %>   <%= @personal.forname %>
         <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3></caption>
       <tbody>
       <% n = 0 %>

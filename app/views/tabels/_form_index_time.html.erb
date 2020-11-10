@@ -4,15 +4,17 @@
   <caption>
     <h3>Табель<br>
       <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %> <br>
-      Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %><br></h3>
+      Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %></h3>
     <% if @access_all_otdel > 0 %>Все отделы
       <% else %><%= $otdel_long[@real_admin.num_otdel.to_i] %> отдел<% end %>
+    <% if @mond.block_timetabel == 0 %> (изменения разрешены) <%end %>
   </caption>
 
   <thead>
   <tr>
     <th align="center">№</th>
     <th align="center"><%=  link_to 'Фамилия', tabels_path(format: $format_time, sort_by_name: "1")  %></th>
+    <th align="center">Имя</th>
     <th align="center"><%=  link_to 'Должность', tabels_path(format: $format_time, sort_by_kadr: "1")  %></th>
     <% if @access_all_otdel > 0 %> <th align="center"><%=  link_to 'Отдел', tabels_path(format: $format_time, sort_by_otdel: "1")  %></th><% end %>
     <th align="center">Дни</th>
@@ -27,13 +29,19 @@
    <% @tabels.each do |f| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
       <td align="center"><%= num += 1 %></td>
-      <% if @level.access_show > 0 %>
+      <% if @access_show > 0 %>
+        <% if f.tagemach == 0 && f.hourmach == 0 && @access_edit > 0 %>
+            <td align="left"><%= link_to f.title, edit_tabel_path(f, params[:format])  %></td>
+        <%else %>
         <td align="left"><%= link_to f.title, tabel_path(f, params[:format])  %></td>
+        <%end %>
       <% else %>
         <td align="left"><%= f.title %></td>
       <% end %>
+        <% @personal = Personal.find_by(id: f.personal_id) %>
+        <td align="left"><%= @personal.forname %></td>
         <td align="center"><%= f.kadr %></td>
-        <% if @level.access_all_otdel > 0 %><td align="left"><%= $otdel_long[f.num_otdel.to_i] %></td><% end %>
+        <% if @access_all_otdel > 0 %><td align="left"><%= $otdel_long[f.num_otdel.to_i] %></td><% end %>
         <td align="center"><%= f.tagemach %></td>
         <td align="center"><%= f.hourmach %></td>
         <td align="center"><%= f.oberhour %></td>
