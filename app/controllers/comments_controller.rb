@@ -73,8 +73,6 @@ class CommentsController < ApplicationController
     @mond     = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
     @tabel= Tabel.find($tabel_id)
     @personal = Personal.find(@tabel.personal_id)
-    #abort @timetabel.email.inspect
-    # новый комментарий
     @comment  = Comment.new(comment_params)
     @comment.tabel_id   =  @tabel.id
     @comment.personal_id    =  @personal.id
@@ -85,7 +83,7 @@ class CommentsController < ApplicationController
     @comment.save
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Новый отзыв на сотрудника создан' }
+        format.html { redirect_to @comment}
         format.json { render action: 'show', status: :created, location: @comment }
       else
         format.html { render action: 'new' }

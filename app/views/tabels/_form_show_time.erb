@@ -20,7 +20,7 @@
     </tbody>
   </table>
   <% if @access_edit >0 && @mond.block_timetabel == 0%>
-  <strong>
+  <strong><br>
   <li><%= link_to 'Изменить',edit_tabel_path(@tabel, format: $format_time) %></li>
   <% else %>
   <li>Карта табеля закрыта</li>

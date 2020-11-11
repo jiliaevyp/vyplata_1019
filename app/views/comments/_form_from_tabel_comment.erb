@@ -1,9 +1,9 @@
 <!-- render for begin for new show edit comment -->
 <table border="1">
   <caption>
-      <h3>Деловая активность<br>
-        <%=  @personal.title %><br>
-        <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %></h3>
+      <h3>Сотрудник<br>
+        <%=  @personal.title %>  <%=  @personal.forname %><br>
+        за <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %></h3>
     Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %>
   </caption>
 

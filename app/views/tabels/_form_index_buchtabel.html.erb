@@ -59,8 +59,8 @@
   </tr>
   <%if @tabels %>
     <tr>
-      <td align="center"><%= num += 1 %></td>
-      <td>Итого</td>
+      <th align="center"><%= num += 1 %></th>
+      <th>Итого</th>
       <td></td>
       <% if @level.access_all_otdel > 0 %><td></td><% end %>
       <td></td>
@@ -68,11 +68,11 @@
       <td></td>
       <td></td>
       <td></td>
-      <td align="right"> <%= sprintf("%0.02f", @summa) %>      </td>
-      <td align="right"> <%= sprintf("%0.02f",@sumkrankengeld) %></td>
-      <td align="right"> <%= sprintf("%0.02f",@sumurlaub_geld) %>    </td>
-      <td align="right"> <%= sprintf("%0.02f",@summinus) %>      </td>
-      <td align="right"> <%= sprintf("%0.02f",@sumvsego) %>     </td>
+      <th align="right"> <%= sprintf("%0.02f", @summa) %>      </th>
+      <th align="right"> <%= sprintf("%0.02f",@sumkrankengeld) %></th>
+      <th align="right"> <%= sprintf("%0.02f",@sumurlaub_geld) %>    </th>
+      <th align="right"> <%= sprintf("%0.02f",@summinus) %>      </th>
+      <th align="right"> <%= sprintf("%0.02f",@sumvsego) %>     </th>
 
     </tr>
   <%end %>

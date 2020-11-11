@@ -56,8 +56,8 @@
   </tr>
   <%if @tabels %>
     <tr>
-      <td align="center"><%= num += 1 %></td>
-      <td>Итого</td>
+      <th align="center"><%= num += 1 %></th>
+      <th>Итого</th>
       <td></td>
       <% if @level.access_all_otdel > 0 %><td></td><% end %>
       <td></td>
@@ -65,10 +65,10 @@
       <td></td>
       <td></td>
       <td></td>
-      <td align="right"> <%= sprintf("%0.02f", @sumoklad) %>   </td>
-      <td align="right"> <%= sprintf("%0.02f", @sumnadbavka) %></td>
-      <td align="right"> <%= sprintf("%0.02f", @sumbonus) %>   </td>
-      <td align="right"> <%= sprintf("%0.02f", @summa) %>      </td>
+      <th align="right"> <%= sprintf("%0.02f", @sumoklad) %>   </th>
+      <th align="right"> <%= sprintf("%0.02f", @sumnadbavka) %></th>
+      <th align="right"> <%= sprintf("%0.02f", @sumbonus) %>   </th>
+      <th align="right"> <%= sprintf("%0.02f", @summa) %>      </th>
 
     </tr>
   <%end %>

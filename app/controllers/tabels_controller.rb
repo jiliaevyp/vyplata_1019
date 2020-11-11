@@ -46,7 +46,7 @@ class TabelsController < ApplicationController
     @tabel      = Tabel.find(params[:id])
     @mond       = Mond.find(@tabel.mond_id)
     @personal   = Personal.find_by(id: @tabel.personal_id)       # добавить поле tabel_id in Comment
-    @comments   = Comment.where(mond_id: @mond.id, personal_id: @tabel.personal_id)
+    @comments   = Comment.where(mond_id: @mond.id, tabel_id: @tabel.id)
     calc_tabel
     send_cardtabel_to_mail
     sassoft_send_cardtabel_to_mail

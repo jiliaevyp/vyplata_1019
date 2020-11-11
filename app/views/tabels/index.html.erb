@@ -20,7 +20,7 @@
         <% when $format_buchtabel %>
           <%= render 'form_index_buchtabel' %>
           <% if @mond.block_tabel > 0 %>Ведомость закрыта!<%end %>
-        <span class="noprint">
+        <span class="noprint"><br>
           <% if @access_print && @mond.block_buchtabel > 0 %><button class="button" onclick="window.print();">Печать </button> <%end %>
         </span>
           <div>

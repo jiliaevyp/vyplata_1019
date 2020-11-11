@@ -6,8 +6,9 @@
   <div class="header">Начисление заработной платы<br> ООО "Геопласт Телеком" </div>
   <div class="sidebar"><%= render('welcome/form_sidebar') %> </div>
   <div class="content_1_col_comment"> <%= render('form_from_tabel_comment') %>
-    <p><button class="button"><%= link_to 'Выход', comments_path, :class=>"button"%></button></div>
-  <div class="content_2_col_comment"> <%= render('form_new_comment') %></div>
+    <p><button class="button"><%= link_to 'Выход', comments_path %></button></div>
+  <div class="content_2_col_comment"> <%= render('form_new_comment') %>
+  <p><button class="button"><%= link_to 'Не сохранять', comments_path %></button></div>
 </div>
 </body>
 <footer></footer>

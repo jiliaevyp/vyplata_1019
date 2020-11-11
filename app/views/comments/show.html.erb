@@ -13,11 +13,11 @@
       <%= render 'form_show_comment' %>
       <% if @mond.block_comment == 0 %>
         <% if @access_edit >0 %>
-          <strong><li><%= link_to 'Изменить', edit_comment_path(@comment) %></li>
+          <p><button class="button"><%= link_to 'Изменить', edit_comment_path(@comment) %></button>
         <% end %>
         <% if @access_del >0 %>
-          <li><%= link_to 'Удалить', @comment, method: :delete,
-                                             data: { confirm: 'Удалить отзыв, Вы уверены?' } %></strong></li>
+          <p><button class="button"><%= link_to 'Удалить', @comment, method: :delete,
+                                                data: { confirm: 'Удалить отзыв, Вы уверены?' } %></button>
         <% end %>
       <% end %>
     </div>
