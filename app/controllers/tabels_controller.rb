@@ -33,6 +33,7 @@ class TabelsController < ApplicationController
         end
       end
       itog
+
     end
 
   end
@@ -49,14 +50,12 @@ class TabelsController < ApplicationController
     @comments   = Comment.where(mond_id: @mond.id, tabel_id: @tabel.id)
     calc_tabel
     send_cardtabel_to_mail
+    @show_history_tabels = Tabel.where(yahre: @mond.yahre, personal_id: @personal.id)
     sassoft_send_cardtabel_to_mail
   end
     #GET /tabels/new
   def new
     @tabel        = Tabel.new
-    #@mond         = Mond.find(@tabel.mond_id)
-    #@personal   = Personal.find(@tabel.personal_id)       # добавить поле tabel_id in Comment
-    #@comments   = Comment.where(mond_id: @mond.id, personal_id: @tabel.personal_id)
   end
 
     # GET /tabels/1/edit

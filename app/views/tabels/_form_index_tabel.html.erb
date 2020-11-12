@@ -7,6 +7,7 @@
     Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %><br></h3>
     <% if @access_all_otdel > 0 %>Все отделы
     <% else %><%= $otdel_long[@real_admin.num_otdel.to_i] %> отдел<% end %>
+    <% if @mond.block_tabel == 0 %> (реестр открыт) <%else %> (реестр закрыт)<%end %>
   </caption>
   <thead>
   <tr>

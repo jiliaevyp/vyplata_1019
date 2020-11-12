@@ -160,12 +160,15 @@ class MondsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  # обработка кнопки аблокировки рабочего времени
+  # обработка кнопки блокировки/разблокировки табеля рабочего времени
   def commit_block_time
     @commit_open   = params[:commit_open_timetabel]            # была нажата "открыть ведомость"
     @commit_close  = params[:commit_close_timetabel]            # была нажата "Закрыть ведомость"
     if @commit_open
       @mond.block_timetabel = 0
+      @mond.block_tabel = 0           # табель начисления и ведомость тоже разблокируются
+      @mond.block_buchtabel = 0
+      @mond.block_comment = 0         # изменения разблокируются для отзывов
       @mond.save
     end
     if @commit_close
@@ -174,20 +177,24 @@ class MondsController < ApplicationController
     end
   end
 
-  # обработка кнопки аблокировки табеля
+  # обработка кнопки блокировки/разблокировки  табеля начисления
   def commit_block_tabel
     @commit_open   = params[:commit_open_tabel]            # была нажата "открыть ведомость"
     @commit_close  = params[:commit_close_tabel]            # была нажата "Закрыть ведомость"
     if @commit_open
       @mond.block_tabel = 0
+      @mond.block_buchtabel = 0       # ведомость тоже разблокируется
+      @mond.block_comment = 0         # изменения разблокируются для отзывов
       @mond.save
     end
     if @commit_close
       @mond.block_tabel = 1           # изменения запрещены
+      @mond.block_timetabel = 1       # изменения запрещены и для табеля рабочего времени
+      @mond.block_comment = 1         # изменения запрещены и для отзывов
       @mond.save
     end
   end
-  # обработка кнопки блокировки ведомости
+  # обработка кнопки блокировки/разблокировки  ведомости
   def commit_block_buchtabel
     @commit_open   = params[:commit_open_buchtabel]            # была нажата "открыть ведомость"
     @commit_close  = params[:commit_close_buchtabel]            # была нажата "Закрыть ведомость"
@@ -196,7 +203,9 @@ class MondsController < ApplicationController
       @mond.save
     end
     if @commit_close
-      @mond.block_buchtabel = 1           # изменения запрещены
+      @mond.block_buchtabel = 1       # изменения запрещены
+      @mond.block_timetabel = 1       # изменения запрещены и для табеля рабочего времени
+      @mond.block_tabel = 1           # изменения запрещены и для табеля начисления
       @mond.save
     end
   end

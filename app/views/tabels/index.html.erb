@@ -13,13 +13,10 @@
       <% case  @format %>
         <% when $format_time %>
           <%= render 'form_index_time' %>
-          <% if @mond.block_timetabel > 0 %>Табель рабочего времени закрыт!<%end %>
         <% when $format_tabel %>
           <%= render 'form_index_tabel' %>
-          <% if @mond.block_tabel > 0 %>Табель начисления закрыт!<%end %>
         <% when $format_buchtabel %>
           <%= render 'form_index_buchtabel' %>
-          <% if @mond.block_tabel > 0 %>Ведомость закрыта!<%end %>
         <span class="noprint"><br>
           <% if @access_print && @mond.block_buchtabel > 0 %><button class="button" onclick="window.print();">Печать </button> <%end %>
         </span>

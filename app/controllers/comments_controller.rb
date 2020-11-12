@@ -13,9 +13,6 @@ class CommentsController < ApplicationController
       else                                      # access only to selbst otdel
         @tabels   = Tabel.where(mond_id: @mond.id, num_otdel: @real_admin.num_otdel).order(:title)
       end
-      if @access_full > 0
-        commit_block
-      end
     end
   end
 
@@ -118,23 +115,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Отзыв удален' }
       format.json { head :no_content }
-    end
-  end
-
-  # обработка кнопки аблокировки comments
-  def commit_block
-    @commit_open  = "Открыть отзывы"
-    @commit_close = "Закрыть отзывы"
-    @commit       = params[:block]                            # была нажата "Закрыть табель"
-    if @commit.nil? == false
-      case @commit
-      when @commit_close
-        @mond.block_comment = 1
-        @mond.save
-      when @commit_open
-        @mond.block_comment = 0
-        @mond.save
-      end
     end
   end
 

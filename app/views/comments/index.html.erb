@@ -7,11 +7,9 @@
     <div class="content">
       <% if @access_index >0 %>
         <%= render('form_index_comment') %>
-        <% if @mond.block_comment > 0 %><br>Изменения заблокированы!<%end %><br>
       <% else %>
         <h1>Отсутствует доступ к данным!</h1>
       <% end %>
-      <br><% if @access_full >0 %><%= render 'form_block_comments' %><% end %>
     </div>
   </div>
 </body>
