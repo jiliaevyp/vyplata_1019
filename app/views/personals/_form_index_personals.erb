@@ -4,7 +4,7 @@
     <h3>Список сотрудников<br>
       <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %><br>
     <% if @access_all_otdel > 0  || $glob_permition > 0 %>Все отделы
-      <% else %><%= $otdel_long[@real_admin.num_otdel.to_i] %> отдел<% end %></h3>
+      <% else %><%= $otdel_long[$real_admin.num_otdel.to_i] %> отдел<% end %></h3>
     <% if @mond.block_personal == 0 %> (изменения разрешены) <%end %>
   </caption>
   <thead>
@@ -23,7 +23,7 @@
   <% @personals.each do |t| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
         <td><%= num += 1 %></td>
-        <% if @access_show > 0 || $glob_permition > 0 %>
+        <% if $glob_permition > 0 || (@access_show > 0 && t.id != $real_admin.id) %>
           <td><%= link_to t.title, personal_path(t) %></td>
         <% else %>
           <td><%= t.title %></td>

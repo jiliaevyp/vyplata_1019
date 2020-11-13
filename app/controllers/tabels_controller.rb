@@ -27,9 +27,9 @@ class TabelsController < ApplicationController
       else
         case "1"
         when @sort_by_name
-          @tabels = Tabel.where(mond_id: @mond.id,num_otdel: @real_admin.num_otdel).order(:title)
+          @tabels = Tabel.where(mond_id: @mond.id,num_otdel: $real_admin.num_otdel).order(:title)
         when  @sort_by_kadr
-          @tabels = Tabel.where(mond_id: @mond.id,num_otdel: @real_admin.num_otdel).order(:kadr)
+          @tabels = Tabel.where(mond_id: @mond.id,num_otdel: $real_admin.num_otdel).order(:kadr)
         end
       end
       itog
@@ -51,6 +51,11 @@ class TabelsController < ApplicationController
     calc_tabel
     send_cardtabel_to_mail
     @show_history_tabels = Tabel.where(yahre: @mond.yahre, personal_id: @personal.id)
+    if @show_history_tabels
+      @summa_history           = @show_history_tabels.sum(:summa)
+    else
+      @summa_history = 0
+    end
     sassoft_send_cardtabel_to_mail
   end
     #GET /tabels/new

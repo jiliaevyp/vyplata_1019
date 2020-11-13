@@ -17,7 +17,6 @@
   <div class="sidebar"><%= render('welcome/form_sidebar') %> </div>
   </span>
   <div class="content_1_col">
-
     <% case  params[:format]%>
     <% when $format_time %>
       <%= render 'form_show_time' %>
@@ -41,6 +40,11 @@
     <%else %>
       <h3> Нет доступа!</h3>
     <%end %>
+  </div>
+  <div class="content_2_col">
+    <% if params[:format] == $format_tabel %>
+    <%= render 'form_show_history_tabel' %>
+    <% end %>
   </div>
 </div>
 </body>

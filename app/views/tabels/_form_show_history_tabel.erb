@@ -1,0 +1,42 @@
+<!-- render for show tabel -->
+
+  <table border="1">
+    <caption> <h3> Зарплата за <%= $jetzt_yahre %>   год <br>
+      <%= @tabel.title %>   <%= @personal.forname %></h3></caption>
+    <tbody>
+    <% num = 0 %>
+    <thead>
+    <tr>
+      <th align="center">№</th>
+      <th align="center">Месяц</th>
+      <th align="center">Отработано(ч)</th>
+      <th align="center">Доп.часы</th>
+      <th align="center">Командировка</th>
+      <th align="center">Всего</th>
+    </tr>
+    </thead>
+    <%num = 0 %>
+    <tbody>
+    <% @show_history_tabels.each do |f| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+        <td align="center"><%= num += 1 %></td>
+        <td align="center"><%= $monat_array[f.num_monat.to_i] %></td>
+        <td align="center"><%= f.hourmach     %></td>
+        <td align="center"><%= f.oberhour     %></td>
+        <td align="center"><%= f.reisetage %></td>
+        <td align="right"> <%= sprintf("%0.02f", f.summa )%></td>
+      <% end %>
+    </tr>
+    <%if @show_history_tabels %>
+      <tr>
+        <th align="center"><%= num += 1 %></th>
+        <th>Итого</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th align="right"> <%= sprintf("%0.02f", @summa_history) %>      </th>
+      </tr>
+    <%end %>
+    </tr>
+    </tbody>
+  </table>

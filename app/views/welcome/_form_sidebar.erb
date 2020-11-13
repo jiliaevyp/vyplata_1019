@@ -1,14 +1,14 @@
 <!-- form for aktive sidebar -->
 <span class="noprint">
-<h2> Текущий месяц:<br>
+<font> Текущий месяц:<br>
   <% if $jetzt_yahre.nil? || $jetzt_num_monat.nil? %>
     <strong> Рабочий год и месяц не выбраны!</strong>
   <% else %>
     <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %>
   <% end %><br>
   <strong----------------
-  <% if @real_admin %>
-    Пользователь <br><%= @real_admin.title %>
+  <% if $real_admin %>
+  Пользователь <br><font color = "yellow"><%= $real_admin.title %></font>
     <% else %>
     <%= link_to 'Пользователь не найден!', welcome_index_path(format:"exit") %>
   <% end %><br>----------------

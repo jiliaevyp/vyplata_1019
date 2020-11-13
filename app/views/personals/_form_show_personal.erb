@@ -1,17 +1,12 @@
 <!-- render for show personal -->
 <table border="1">
-  <h2><div class="caption">Персональная карта сотрудника<br></h2>
-
+  <caption> <h3>Персональная карта сотрудника <br>
+    <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
+  </h3></caption>
  <thead>
-  <tr>
-    <th>№</th><th>Пункт карты</th><th>Содержание</th>
-    <% n = 0 %>
-  </tr>
+  <% n = 0 %>
  </thead>
  <tbody>
-  <tr> <td><%= n += 1 %></td> <td>Фамилия:</td> <td align="center"><%= @personal.title %></td> </tr>
-  <tr> <td><%= n += 1 %></td> <td>Имя</td><td align="center"><%= @personal.forname %></td> </tr>
-  <tr> <td><%= n += 1 %></td> <td>Отчество</td><td align="center"><%= @personal.fornametwo %></td></tr>
   <tr> <td><%= n += 1 %></td> <td>Должность</td> <td align="center"><%= @personal.kadr %></td> </tr>
   <tr> <td><%= n += 1 %></td> <td>Отдел</td> <td align="center"><%= $otdel_long[@personal.num_otdel.to_i] %></td> </tr>
   <tr> <td><%= n += 1 %></td> <td>Тариф (руб/час)</td><td align="center"><%= @personal.tarifhour %></td>

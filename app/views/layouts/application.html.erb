@@ -99,7 +99,7 @@
     margin-left: 50%; /* Отступ слева */
     width: 40%; /* Ширина блока */
     padding: 10px; /* Отступы внутри правого блока */
-    background: #99cc99; /* Цвет фона контента */
+    #background: #99cc99; /* Цвет фона контента */
   }
   .content_1_col_comment {
     margin-top: 1px;
@@ -256,8 +256,10 @@
 
 <span class = "noprint">
 <br> params ==> <%= params %><p>
+
+<%if $glob_permition %> $glob_permition= <%= $glob_permition %> <% else %>unknown!<% end %><br>
+  <%if $real_admin %> $real_admin= <%= $real_admin.email %> <% else %>unknown!<% end %><br>
   <% if nil %>
-<%if $glob_permition %> $glob_permition= <%= $glob_permition %> <% else %>unknown!<% end %>
   <%if @level %> @level.access_all_otdel= <%= @level.access_all_otdel %> <% else %>unknown!<% end %>
   @block_timetabel=     <%if @mond.block_timetabel %><%= @mond.block_timetabel %> <%else %>unknown!<%end %>
   @block_tabel=         <%if @mond.block_tabel %><%= @mond.block_tabel %> <%else %>unknown!<%end %>
@@ -272,16 +274,16 @@
     @block_tabel=         <%if @mond.block_tabel %><%= @mond.block_tabel %> <%else %>unknown!<%end %>
     @block_buchtabel=     <%if @mond.block_buchtabel %><%= @mond.block_buchtabel %> <%else %>unknown!<%end %><p>
 <%end %>
-
-<!--@access_full =     <!-% if @access_full %><!-%= @access_full %> <!-% else %>unknown!<!-% end %>
-@access_all_otdel =   <!-% if @access_all_otdel %> <!-%= @access_all_otdel %> <!-% else %>unknown!<!-% end %>
-@access_index =   <!-% if @access_index %> <!-%= @access_index %> <!-%else %>unknown!<!-% end %>
-@access_show =    <!-% if @access_show %> <!-0%= @access_show %> <!-%else %>unknown!<!-% end %>
-@access_edit =    <!-% if @access_edit %> <!-%= @access_edit %> <!-%else %>unknown!<!-% end %>
-@access_new =     <!-% if @access_new %> <!-%= @access_new %> <!-%else %>unknown!<!-% end %>
-@access_delete =  <!-% if @access_delete %> <!-%= @access_delete %> <!-%else %>unknown!<!-% end %>
-@access_format =  <!-% if @access_format %> <!-%= @access_format %> <!-%else %>unknown!<!-% end %-->
-
+  <%if nil %>
+<@access_full =   <% if @access_full %><%= @access_full %> <% else %>unknown!<% end %>
+@access_all_otdel=<% if @access_all_otdel %> <%= @access_all_otdel %> <% else %>unknown!<% end %>
+@access_index =   <% if @access_index %> <%= @access_index %> <%else %>unknown!<% end %>
+@access_show =    <% if @access_show %> <%= @access_show %> <%else %>unknown!<% end %>
+@access_edit =    <% if @access_edit %> <%= @access_edit %> <%else %>unknown!<% end %>
+@access_new =     <% if @access_new %> <%= @access_new %> <%else %>unknown!<% end %>
+@access_delete =  <% if @access_del %> <%= @access_del %> <%else %>unknown!<% end %>
+@format =  <% if @format %> <%= @format %> <%else %>unknown!<% end %>
+<%end %>
 </span>
 
 

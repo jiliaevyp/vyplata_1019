@@ -23,7 +23,7 @@ class PersonalsController < ApplicationController
       end
 
     else
-      if @real_admin && @level       # if Personal is not empty
+      if $real_admin && @level       # if Personal is not empty
         if @access_all_otdel > 0
           case "1"
           when @sort_by_name
@@ -40,7 +40,7 @@ class PersonalsController < ApplicationController
           when  @sort_by_kadr
             @personals = Personal.order(:kadr)
           end
-          @personals = Personal.where(num_otdel: @real_admin.num_otdel).order(:title) # доступ только к своему отделу
+          @personals = Personal.where(num_otdel: $real_admin.num_otdel).order(:title) # доступ только к своему отделу
         end
       end
     end
@@ -76,7 +76,7 @@ class PersonalsController < ApplicationController
     @personal.otdel = $otdel_long[@personal.num_otdel.to_i]
     respond_to do |format|
       if @personal.save
-        format.html { redirect_to @personal, notice: 'Персональная карта сотрудника сохранена' }
+        format.html { redirect_to @personal} #, notice: 'Персональная карта сотрудника сохранена' }
         format.json { render action: 'show', status: :created, location: @personal }
       else
         format.html { render action: 'new' }
@@ -93,7 +93,7 @@ class PersonalsController < ApplicationController
       @mond = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre)
       respond_to do |format|
         if @personal.update(personal_params)
-          format.html { redirect_to personal_path(personal_id: @personal.id), notice: 'Персональная карта изменена'}
+          format.html { redirect_to personal_path(personal_id: @personal.id)}#, notice: 'Персональная карта изменена'}
           format.json { render action: 'personals/show', status: :created, location: @personal }
         else
           format.html { render action: 'edit' }

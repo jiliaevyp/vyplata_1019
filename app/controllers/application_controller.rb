@@ -29,7 +29,7 @@ private
 
     #abort @admin.title.inspect
     if $admin
-      @real_admin = Personal.find_by(id: $admin.personal_id)
+      $real_admin = Personal.find_by(id: $admin.personal_id)
       #abort @admin.title.inspect
       #----------------ищем запись доступа  ---------------------
       @level = Level.find_by(admin_id: $admin.id, access_controller: @controller)
