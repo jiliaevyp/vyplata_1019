@@ -13,6 +13,9 @@
       <% case  @format %>
         <% when $format_time %>
           <%= render 'form_index_time' %>
+          <% if @mond.block_timetabel == 0 %><br>
+          <button><%= link_to 'Добавить',new_tabel_path(@tabel, format: $format_time) %></button>
+          <% end %>
         <% when $format_tabel %>
           <%= render 'form_index_tabel' %>
         <% when $format_buchtabel %>
@@ -24,7 +27,7 @@
           <p><strong> Директор                                     Жиляев Ю.  </strong></p>
           <p><strong> Главный бухгалтер                            Лазарева Е. </strong></p>
           </div>
-        <%  end %>
+        <% end %>
     <% else %>
       <h1>Отсутствует доступ к данным!</h1>
     <% end %>

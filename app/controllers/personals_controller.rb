@@ -36,11 +36,11 @@ class PersonalsController < ApplicationController
         else
           case "1"
           when @sort_by_name
-            @personals = Personal.order(:title)
+            @personals = Personal.where(num_otdel: $real_admin.num_otdel).order(:title)
           when  @sort_by_kadr
-            @personals = Personal.order(:kadr)
+            @personals = Personal.where(num_otdel: $real_admin.num_otdel).order(:kadr)
           end
-          @personals = Personal.where(num_otdel: $real_admin.num_otdel).order(:title) # доступ только к своему отделу
+          @personals = Personal.where(num_otdel: $real_admin.num_otdel).order(:title)#, id: not($real_admin.id))#&&(where.not(id: $real_admin.id)).order(:title) # доступ только к своему отделу
         end
       end
     end

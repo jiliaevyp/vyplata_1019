@@ -21,7 +21,7 @@
     <%num = 0 %>
     <% @tabels.each do |f| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-      <% if f.personal_id != @real_admin.id %>     <!-- просмотр отзывов на себя невозможен -->
+      <% if f.personal_id != $real_admin.id %>     <!-- просмотр отзывов на себя невозможен -->
         <td><%= num += 1        %></td>                                   <!-- гендиректору можно -->
         <td><%= f.title %></td>
         <td><%= f.kadr  %></td>

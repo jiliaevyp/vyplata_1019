@@ -33,7 +33,7 @@ class TabelsController < ApplicationController
         end
       end
       itog
-
+      #add_tabel
     end
 
   end
@@ -58,6 +58,7 @@ class TabelsController < ApplicationController
     end
     sassoft_send_cardtabel_to_mail
   end
+
     #GET /tabels/new
   def new
     @tabel        = Tabel.new
@@ -153,6 +154,7 @@ class TabelsController < ApplicationController
     end
   end
   def add_tabel               #добавление нового табеля
+    @tabel= Tabel.new
     @tabel.personal_id   = @personal.id
     @tabel.title         = @personal.title
     @tabel.kadr          = @personal.kadr

@@ -13,7 +13,7 @@
 <% if @comments %>
   <% @comments.each  do |t| %>
   <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-    <% if t.commenter_title == @real_admin.title %>
+    <% if t.commenter_title == $real_admin.title %>
       <td> <%= num += 1        %></td>
       <td allign="left"><%= t.body %></td>
       <td align="center"><%= t.plunus  %></td>

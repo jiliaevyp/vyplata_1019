@@ -1,0 +1,26 @@
+<!-- form for edit @tabel -->
+<%= form_for(@tabel) do |f| %>
+    <% if @tabel.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@tabel.errors.count, "error") %> prohibited this mond from being saved:</h2>
+          <ul>
+            <% @tabel.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+<% end %>
+<%= form_for(@tabel) do |f| %>
+    <table border="1">
+      <caption> <h3>Добавление сотрудника в табель <br>
+           <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3></caption>
+      <tbody>
+      <% n = 0 %>
+      <tr> <td><%= n += 1 %></td> <td>Фамилия</td> <td align = "center">
+        <%= f.select :personal_id, options_from_collection_for_select(Personal, :id, :title) %></td></tr>
+      </tbody>
+    </table><br>
+  <button class="button"><%= f.submit "Добавить" %></button><br><br>
+  <button class="button"><%= link_to "Выход без добавление", tabels_path(format: $format_time) %></button>
+  <% end %>
