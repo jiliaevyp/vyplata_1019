@@ -14,7 +14,7 @@
         <% when $format_time %>
           <%= render 'form_index_time' %>
           <% if @mond.block_timetabel == 0 %><br>
-          <button><%= link_to 'Добавить',new_tabel_path(@tabel, format: $format_time) %></button>
+          <button><%= link_to 'Добавить сотрудника в текущий табель',new_tabel_path(@tabel, format: $format_time) %></button>
           <% end %>
         <% when $format_tabel %>
           <%= render 'form_index_tabel' %>

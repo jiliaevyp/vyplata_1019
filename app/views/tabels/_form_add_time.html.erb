@@ -18,7 +18,7 @@
       <tbody>
       <% n = 0 %>
       <tr> <td><%= n += 1 %></td> <td>Фамилия</td> <td align = "center">
-        <%= f.select :personal_id, options_from_collection_for_select(Personal, :id, :title) %></td></tr>
+        <%= f.select :personal_id, options_from_collection_for_select(Personal.all, :id, :title && :title) %></td></tr>
       </tbody>
     </table><br>
   <button class="button"><%= f.submit "Добавить" %></button><br><br>

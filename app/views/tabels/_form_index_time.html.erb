@@ -23,6 +23,7 @@
     <th align="center">Командировки</th>
     <th align="center">Отпуск</th>
     <th align="center">Больничный</th>
+    <th align="center">Удалить</th>
     </tr>
   </thead>
   <%num = 0 %>
@@ -48,6 +49,11 @@
         <td align="center"><%= f.reisetage %></td>
         <td align="center"><%= f.urlaub %></td>
         <td align="center"><%= f.krankentage %></td>
+        <% if ($glob_permition > 0 || @access_del > 0) && @mond.block_timetabel == 0 %>
+          <td><%= link_to 'Удалить',  f, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <% else %>
+          <td align="center"> Удалить</td>
+        <% end %>
    <% end %>
     </tr>
   </tbody>

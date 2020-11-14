@@ -45,13 +45,8 @@
           <td align="center"><%= $access_show[t.access_index.to_i] %></td>
           <td align="center"><%= $access_show[t.access_show.to_i] %></td>
           <td align="center"><%= $access_show[t.access_edit.to_i] %></td>
-          <% if t.access_controller == $tabels%>
-            <td class ='pasline'></td>
-            <td class ='pasline'></td>
-          <% else %>
           <td align="center"><%= $access_show[t.access_new.to_i] %></td>
           <td align="center"><%= $access_show[t.access_del.to_i] %></td>
-          <% end %>
           <td align="center"><%= $access_show[t.access_print.to_i] %></td>
           <td align="center"><%= $access_show[t.access_email.to_i] %></td>
           <td align="center"><%= link_to 'Удалить запись', t, method: :delete, data: { confirm: 'Вы уверены?' } %></td>

@@ -34,10 +34,8 @@
       <tr> <td><%= n += 1 %></td> <td>Доступ к таблице</td>     <td align = "center"><%= f.select :access_index, $access_select %></td></tr>
       <tr> <td><%= n += 1 %></td> <td>Просмотр</td>      <td align = "center"><%= f.select :access_show,  $access_select %></td></tr>
       <tr> <td><%= n += 1 %></td> <td>Изменение</td>      <td align = "center"><%= f.select :access_edit,  $access_select %></td></tr>
-    <% if @level.access_controller == "monds" || @level.access_controller == $personals || @level.access_controller == $comments %>
       <tr> <td><%= n += 1 %></td> <td>Новая запись</td>       <td align = "center"><%= f.select :access_new,   $access_select %></td></tr>
       <tr> <td><%= n += 1 %></td> <td>Удаление</td>    <td align = "center"><%= f.select :access_del,   $access_select %></td></tr>
-    <% end %>
       <tr> <td><%= n += 1 %></td> <td>Печать</td>     <td align = "center"><%= f.select :access_print, $access_select %></td> </tr>
       <tr> <td><%= n += 1 %></td> <td>Эл.почта</td>     <td align = "center"><%= f.select :access_email, $access_select %></td> </tr>
       </tbody>

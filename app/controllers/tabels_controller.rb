@@ -86,22 +86,26 @@ class TabelsController < ApplicationController
   def create
     @tabel      = Tabel.new(tabel_params)
     #@personal   = Personal.find(@tabel.personal_id)
-    @mond       = Mond.find_by(mond_id: @mond.id, yahre: $jetzt_yahre)
-    @tabel_old  = Tabel.find_by(personal_id: @personal.id, mond_id: @mond.id, yahre: $jetzt_yahre ) #проверка на сущ запись
-    unless @tabel_old
+    @mond       = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre)
+    #@tabel_old  = Tabel.find_by(personal_id: @personal.id, mond_id: @mond.id, yahre: $jetzt_yahre ) #проверка на сущ запись
+    #unless @tabel_old
       add_tabel
       calc_tabel
       @tabel.save
+      @updated_at = @tabel.updated_at
+    #abort @tabel.updated_at.inspect
       respond_to do |format|
         if @tabel.save
-          format.html { redirect_to tabel_path(@tabel), notice: 'Карта табеля успешно создана' }
-          format.json { render :show, status: :created, location: tabel_path(@tabel) }
+          #Tabel.where(updated_at: < @updated_at).delete_all
+          #abort @tabel.personal_id.inspect
+          format.html { redirect_to tabel_path(@tabel, format:$format_time)}#, notice: 'Карта табеля успешно создана' }
+          format.json { render :show, status: :created, location: tabels_path(format:$format_time) }
         else
           format.html { redirect_to  new_tabel_path(@tabel)}
           format.json { render json: @tabel.errors, status: :unprocessable_entity }
         end
       end
-    end
+    #end
   end
 
     # PATCH/PUT /tabels/1
@@ -149,13 +153,14 @@ class TabelsController < ApplicationController
     @tabel  = Tabel.find(params[:id])
     @tabel.destroy
     respond_to do |format|
-      format.html { redirect_to tabels_url, notice: 'Карта начисления удалена' }
+      format.html { redirect_to tabels_url(format: $format_time), notice: 'Карта начисления удалена' }
       format.json { head :no_content }
     end
   end
   def add_tabel               #добавление нового табеля
-    @tabel= Tabel.new
-    @tabel.personal_id   = @personal.id
+    #@tabel= Tabel.new
+    #@tabel.personal_id   = @personal.id
+    @personal = Personal.find(@tabel.personal_id)
     @tabel.title         = @personal.title
     @tabel.kadr          = @personal.kadr
     @tabel.email         = @personal.email
