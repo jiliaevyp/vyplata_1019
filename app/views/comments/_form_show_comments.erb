@@ -1,8 +1,8 @@
 <!-- render for comments show -------------->
 <table border = "1">
   <caption> <h3>Отзывы на сотрудника <br>
-    <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
-    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3></caption>
+    <font color="red"><%= @personal.title %><%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
+    <%= $monat_array[$jetzt_num_monat.to_i] %><%= $jetzt_yahre %></h3></caption>
 <thead>
 <tr>
   <th>№</th><th>Отзыв</th><th>Оценка</th><th>Автор отзыва></th><th>Просмотр</th>
@@ -18,7 +18,7 @@
       <td allign="left"><%= t.body %></td>
       <td align="center"><%= t.plunus  %></td>
       <td align="center"><%= t.commenter_title %></td>
-      <td><%= link_to "Просмотр", comment_path(t.id)%></td>
+      <td><%= link_to "Просмотреть", comment_path(t.id)%></td>
     <% end %>
   <% end %>
 
