@@ -6,12 +6,11 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @mond       = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
-    @personals  = Personal.order(:title)
-    if (@mond.nil? == false) & (@personals.nil? == false)             # проверяем что есть запись Mond и @personals
+    if @mond.nil? == false            # проверяем что есть запись Mond и @personals
       if @access_all_otdel > 0            # access to full otdel
         @tabels   = Tabel.where(mond_id: @mond.id).order(:title)
       else                                      # access only to selbst otdel
-        @tabels   = Tabel.where(mond_id: @mond.id, num_otdel: @real_admin.num_otdel).order(:title)
+        @tabels   = Tabel.where(mond_id: @mond.id, num_otdel: $real_admin.num_otdel).order(:title)
       end
     end
   end
@@ -74,8 +73,9 @@ class CommentsController < ApplicationController
     @comment.tabel_id   =  @tabel.id
     @comment.personal_id    =  @personal.id
     @comment.mond_id        =  @mond.id
-    @comment.commenter_title=  @real_admin.title
+    @comment.commenter_title=  $real_admin.title
     @comment.data           =  Time.zone.now
+    #Comment.where(mond_id: @mond.id, tabel_id: @tabel.id).delete_all
     #set_tag_hour
     @comment.save
     respond_to do |format|

@@ -31,6 +31,9 @@
       <li> Удалить</li>
         <% end %>
       </strong></ul>
+    <%if @access_full > 0 %>
+    <%= render 'form_block_mond' %><br>
+    <%end %>
      <button class="button"><%= link_to 'Выход', monds_path %></button>
   </div>
 </div>

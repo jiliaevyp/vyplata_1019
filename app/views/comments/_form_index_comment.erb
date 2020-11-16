@@ -9,35 +9,34 @@
 </caption>
   <thead>
   <tr>
-     <th align="center">№</th>
+    <th align="center">№</th>
     <th align="center">Фамилия</th>
+    <th align="center">Имя</th>
     <th align="center">Должность</th>
     <th align="center">Отдел</th>
-    <th align="center">Просмотр</th>
-    <th align="center">Создать</th>
+    <th align="center">Создать отзыв</th>
   </tr>
   </thead>
   <tbody>
-    <%num = 0 %>
+    <% num = 0 %>
     <% @tabels.each do |f| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-      <% if f.personal_id != $real_admin.id %>     <!-- просмотр отзывов на себя невозможен -->
-        <td><%= num += 1        %></td>                                   <!-- гендиректору можно -->
+        <td><%= num += 1 %></td>                                   <!-- гендиректору можно -->
+        <% if (@access_show >0 && f.personal_id != $real_admin.id) || $glob_permition >0%>     <!-- просмотр отзывов на себя невозможен -->
+          <td class="list_action"><%= link_to f.title, comments_show_path(f.id) %></td>
+        <%else %>
         <td><%= f.title %></td>
+        <%end %>
+        <% @personal = Personal.find_by(id: f.personal_id) %>
+        <td align="left"><%= @personal.forname %></td>
         <td><%= f.kadr  %></td>
         <td align="center"><%= $otdel_long[f.num_otdel.to_i] %></td>
-          <% if @access_show >0 %>
-            <td class="list_action"><%= link_to "Просмотр", comments_show_path(f.id) %></td>
-          <% else %>
-            <td class="list_action"><%= "Недоступно" %></td>
-          <% end %>
-          <% if @mond.block_comment == 0 && @access_new >0 %>
-            <td class="list_action"> <%= link_to "Написать", new_comment_path(f.id)  %></td>
-          <%else %>
-            <td class="list_action"><%= "Недоступно" %></td>
-          <% end %>
-        <%end %>
-  <% end %>
-  </tr>
+        <% if (@mond.block_comment == 0 && @access_new >0 && f.personal_id != $real_admin.id) || $glob_permition >0 %>
+           <td align="center"> <%= link_to "Написать", new_comment_path(f.id)  %></td>
+        <%else %>
+           <td align="center">---</td>
+        <% end %>
+      <%end %>
+      </tr>
   </tbody>
 </table>

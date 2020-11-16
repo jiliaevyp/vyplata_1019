@@ -1,14 +1,12 @@
 <!-- render for show monat&yahre information -->
 <br>
-<table border="1">
+<table border="1" style="background-color: #b1f3d8" >
   <caption><h2> Текущий месяц<br>
-    <%= $monat_array[$jetzt_num_monat] %>  <%= $jetzt_yahre %></h2></caption>
+    <%= $monat_array[$jetzt_num_monat] %>  <%= $jetzt_yahre %></h2>
+    <% if @mond.block_mond == 0 %> (изменения разрешены) <%end %></caption>
   <thead>
-   <tr>
-    <th>№</th><th>Наименование</th><th>Значение</th>
-    <% n = 0 %>
-   </tr>
-  </thead>
+   <% n = 0 %>
+  </thead><color=background: #52c5dd>
   <tbody>
     <tr> <td><%= n += 1 %></td> <td>Рабочих дней</td>
                                 <td align="center"><%= @mond.tag %></td> </tr>
@@ -20,12 +18,5 @@
                                 <td align="center"><%= sprintf("%0.00f %",@mond.kfnalog) %></td> </tr>
     <tr> <td><%= n += 1 %></td> <td>Отчисления в соц.фонды (%)</td>
                                 <td align="center"><%= sprintf("%0.00f %",@mond.procentsocial) %></td> </tr>
-    <% if @mond.block_mond > 0 %>
-    <tr> <td><%= n += 1 %></td> <td>Блокировка</td>
-      <td align="center"> Заблокирован</td> </tr>
-    <%else %>
-    <tr> <td><%= n += 1 %></td> <td>Блокировка</td>
-      <td align="center"> Изменения разрешены</td> </tr>
-    <%end %>
-<tbody>
+    <tbody></colorbackground:>
 </table>

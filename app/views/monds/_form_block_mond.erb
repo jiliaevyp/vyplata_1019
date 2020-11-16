@@ -2,10 +2,10 @@
 
   <%= form_tag(@controller_name, method: "get", class: "nifty_form") do %>
     <% if @mond.block_mond == 1 %>
-      <submit><%= submit_tag("Открыть месяц",name:"block",value: @commit_open,
-                             data: {confirm:'У вас есть доступ?',referral_code: "1234" })%></submit>
+    <button class="button"><%= submit_tag("Открыть месяц",name:"commit_open_mond",
+                                          data: {confirm:'Открыть месяц для изменений?',referral_code: "1234" })%></button>
     <% else %>
-      <submit><%= submit_tag("Закрыть месяц" , name:"block", value: @commit_close,
-                             data: {confirm:'Вы хотите закрыть месяц?'})%></submit>
+    <button class="button"><%= submit_tag("Закрыть месяц", name:"commit_close_mond",
+                             data: {confirm:'Вы хотите закрыть месяц?'})%></button>
     <% end %>
   <% end %>

@@ -1,7 +1,7 @@
 <!-- form for new comment -->
 <caption>
   <h3>Отзыв по работе сотрудника<br>
-    <%=  @personal.title %>  <%=  @personal.forname %><br>
+    <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>>
     за <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %></h3>
 </caption>
 <%= form_for(@comment) do |f| %>

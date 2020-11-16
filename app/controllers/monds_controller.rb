@@ -35,6 +35,7 @@ class MondsController < ApplicationController
   # GET /monds/1.json
   def show
     @mond = Mond.find(params[:id])
+    commit_block_mond
   end
 
   # GET /monds/new
@@ -160,6 +161,22 @@ class MondsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # обработка кнопки блокировки/разблокировки табеля рабочего времени
+  def commit_block_mond
+    @commit_open   = params[:commit_open_mond]            # была нажата "открыть ведомость"
+    @commit_close  = params[:commit_close_mond]            # была нажата "Закрыть ведомость"
+
+    if @commit_open
+      @mond.block_mond = 0
+      @mond.save
+    end
+    if @commit_close
+      @mond.block_mond = 1           # изменения запрещены
+      @mond.save
+    end
+  end
+
   # обработка кнопки блокировки/разблокировки табеля рабочего времени
   def commit_block_time
     @commit_open   = params[:commit_open_timetabel]            # была нажата "открыть ведомость"

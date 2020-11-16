@@ -85,14 +85,12 @@ class TabelsController < ApplicationController
     # POST /tabels.json
   def create
     @tabel      = Tabel.new(tabel_params)
-    #@personal   = Personal.find(@tabel.personal_id)
     @mond       = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre)
-    #@tabel_old  = Tabel.find_by(personal_id: @personal.id, mond_id: @mond.id, yahre: $jetzt_yahre ) #проверка на сущ запись
-    #unless @tabel_old
+    @personal   = Personal.find(@tabel.personal_id)
+    Tabel.where(mond_id: @mond.id, personal_id: @personal.id).delete_all
       add_tabel
       calc_tabel
       @tabel.save
-      @updated_at = @tabel.updated_at
     #abort @tabel.updated_at.inspect
       respond_to do |format|
         if @tabel.save
