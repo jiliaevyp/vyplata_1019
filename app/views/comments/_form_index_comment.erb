@@ -3,9 +3,7 @@
   <caption><h3>
     Отзывы на сотрудников<br>
     <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3>
-    <% if @access_all_otdel > 0 %>Все отделы
-      <% else %><%= $otdel_long[$real_admin.num_otdel.to_i] %> отдел<% end %>
-    <% if @mond.block_comment == 0 %> (реестр открыт) <%else %> (реестр закрыт)<%end %>
+    <%= @otdel %><%= $reestr_block_umblock[@mond.block_comment] %>
 </caption>
   <thead>
   <tr>
@@ -21,22 +19,18 @@
     <% num = 0 %>
     <% @tabels.each do |f| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-        <td><%= num += 1 %></td>                                   <!-- гендиректору можно -->
-        <% if (@access_show >0 && f.personal_id != $real_admin.id) || $glob_permition >0%>     <!-- просмотр отзывов на себя невозможен -->
-          <td class="list_action"><%= link_to f.title, comments_show_path(f.id) %></td>
-        <%else %>
-        <td><%= f.title %></td>
-        <%end %>
-        <% @personal = Personal.find_by(id: f.personal_id) %>
-        <td align="left"><%= @personal.forname %></td>
-        <td><%= f.kadr  %></td>
-        <td align="center"><%= $otdel_long[f.num_otdel.to_i] %></td>
-        <% if (@mond.block_comment == 0 && @access_new >0 && f.personal_id != $real_admin.id) || $glob_permition >0 %>
-           <td align="center"> <%= link_to "Написать", new_comment_path(f.id)  %></td>
-        <%else %>
-           <td align="center">---</td>
-        <% end %>
-      <%end %>
+      <td><%= num += 1 %></td>                                   <!-- гендиректору можно -->
+      <td class="list_action"><%= link_to f.title, comments_show_path(f.id) %></td>
+      <% @personal = Personal.find_by(id: f.personal_id) %>
+      <td align="left"><%= @personal.forname %></td>
+      <td><%= f.kadr  %></td>
+      <td align="center"><%= $otdel_long[f.num_otdel.to_i] %></td>
+      <% if @mond.block_comment == 0  %>
+        <td align="center"> <%= link_to "Написать", new_comment_path(f.id)  %></td>
+      <%else %>
+        <td align="center">---</td>
+      <% end %>
+    <%end %>
       </tr>
   </tbody>
 </table>

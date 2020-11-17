@@ -5,7 +5,8 @@
     <caption><h3>
     <%= "Автор отзыва" %><br>
       <%= @comment.commenter_title %></h3>
-    Сотрудник <%= @tabel.title %>
+    Сотрудник <br>
+      <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>>
     </caption><br>
 
     <%= f.text_area(:body, size: "50x4") %> <br>

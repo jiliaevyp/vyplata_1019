@@ -6,11 +6,20 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @mond       = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
+    if @access_all_otdel > 0 || $glob_permition > 0
+      @otdel = $all_otdel
+    else
+      @otdel  = $otdel_long[$real_admin.num_otdel] +"  отдел"
+    end
     if @mond.nil? == false            # проверяем что есть запись Mond и @personals
-      if @access_all_otdel > 0            # access to full otdel
+      if $glob_permition >0
         @tabels   = Tabel.where(mond_id: @mond.id).order(:title)
-      else                                      # access only to selbst otdel
-        @tabels   = Tabel.where(mond_id: @mond.id, num_otdel: $real_admin.num_otdel).order(:title)
+      else
+        if @access_all_otdel > 0            # access to full otdel
+          @tabels = Tabel.where(mond_id: @mond.id).where.not(personal_id:$real_admin.id).order(:title)
+        else                                      # access only to selbst otdel
+          @tabels = Tabel.where(mond_id: @mond.id,num_otdel: $real_admin.num_otdel).where.not(personal_id:$real_admin.id).order(:title)
+        end
       end
     end
   end

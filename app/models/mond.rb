@@ -11,6 +11,8 @@ class Mond < ActiveRecord::Base
                   'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']
   $base_block = [['Блокировать',1], ['Разблокировать', 0]]
 
+  $reestr_block_umblock  = ["(реестр открыт)" ,"(реестр закрыт)"]
+
 
   #validates :yahre, presence: true
   validates :tag, :hour, :kfoberhour, :kfnalog, :procentsocial, presence: true #:num_monat,

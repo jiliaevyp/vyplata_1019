@@ -10,6 +10,8 @@ class Level < ActiveRecord::Base
   $format_buchtabel =  "buchtabel"       # access to ведомость
   $format_unknown   =  "---"
 
+  $all_otdel        =  "Все отделы"
+
   #$controller = [$monds, $personals, $tabels, $comments]
   $controller_select  = [["Месяцы", $monds_controller],["Персонал",$personals],["Ведомость",$tabels],["Отзывы",$comments]]
 

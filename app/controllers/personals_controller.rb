@@ -5,6 +5,11 @@ class PersonalsController < ApplicationController
   # GET /personals
   # GET /personals.json
   def index
+    if @access_all_otdel > 0 || $glob_permition > 0
+      @otdel = $all_otdel
+    else
+      @otdel  = $otdel_long[$real_admin.num_otdel] +"  отдел"
+    end
     @sort_by_name = params[:sort_by_name]
     @sort_by_otdel = params[:sort_by_otdel]
     @sort_by_kadr = params[:sort_by_kadr]

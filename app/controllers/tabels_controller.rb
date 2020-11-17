@@ -6,6 +6,11 @@ class TabelsController < ApplicationController
   # GET /tabels.json
   def index
     @mond       = Mond.find_by(num_monat: $jetzt_num_monat,yahre: $jetzt_yahre )
+    if @access_all_otdel > 0 || $glob_permition > 0
+      @otdel = $all_otdel
+    else
+      @otdel  = $otdel_long[$real_admin.num_otdel] +"  отдел"
+    end
     #abort params[:format].inspect
     @sort_by_name = params[:sort_by_name]
     @sort_by_otdel = params[:sort_by_otdel]
