@@ -3,7 +3,7 @@
 <table border="1">
   <caption>
     <h3>Ведомость<br>
-      <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %> <br>
+      <%= $monat_array[@mond.num_monat.to_i] %>  <%= @mond.yahre %> <br>
       Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %><br></h3>
     <%= @otdel %>      <%= $reestr_block_umblock[@mond.block_buchtabel] %>
   </caption>
@@ -35,8 +35,7 @@
       <% else %>
         <td align="left"><%= f.title %></td>
       <% end %>
-      <% @personal = Personal.find_by(id: f.personal_id) %>
-      <td align="left"><%= @personal.forname %></td>
+      <td align="left"><%= f.forname %></td>
       <td align="left">  <%= f.kadr %></td>
       <% if @level.access_all_otdel > 0 %><td align="left"><%= $otdel_long[f.num_otdel.to_i] %></td><% end %>
       <td align="center"><%= f.tarifhour    %></td>

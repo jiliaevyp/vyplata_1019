@@ -50,12 +50,12 @@ class TabelsController < ApplicationController
     # просмотр карты ведомости    params[:format]==$format_buchtabel
   def show
     @tabel      = Tabel.find(params[:id])
-    @mond       = Mond.find(@tabel.mond_id)
-    @personal   = Personal.find_by(id: @tabel.personal_id)       # добавить поле tabel_id in Comment
-    @comments   = Comment.where(mond_id: @mond.id, tabel_id: @tabel.id)
+    #@mond       = Mond.find(@tabel.mond_id)
+    #@personal   = Personal.find_by(id: @tabel.personal_id)       # добавить поле tabel_id in Comment
+    @comments   = Comment.where(tabel_id: @tabel.id,mond_id: @tabel.mond_id)
     calc_tabel
     send_cardtabel_to_mail
-    @show_history_tabels = Tabel.where(yahre: @mond.yahre, personal_id: @personal.id)
+    @show_history_tabels = Tabel.where(mond_id: @mond.id, email: @tabel.email)
     if @show_history_tabels
       @summa_history           = @show_history_tabels.sum(:summa)
     else
@@ -73,10 +73,7 @@ class TabelsController < ApplicationController
   def edit
     @tabel      = Tabel.find(params[:id])
     $params = params[:format]
-    @mond       = Mond.find(@tabel.mond_id)
-    @personal   = Personal.find_by(id: @tabel.personal_id)       # добавить поле tabel_id in Comment
-
-    @comments   = Comment.where(mond_id: @mond.id, personal_id: @tabel.personal_id)
+    @comments   = Comment.where(tabel_id: @tabel.id,mond_id: @tabel.mond_id)
     @sumplunus = @comments.sum(:plunus)
     @count_plunus = @comments.count
     if @count_plunus > 0
@@ -99,8 +96,6 @@ class TabelsController < ApplicationController
     #abort @tabel.updated_at.inspect
       respond_to do |format|
         if @tabel.save
-          #Tabel.where(updated_at: < @updated_at).delete_all
-          #abort @tabel.personal_id.inspect
           format.html { redirect_to tabel_path(@tabel, format:$format_time)}#, notice: 'Карта табеля успешно создана' }
           format.json { render :show, status: :created, location: tabels_path(format:$format_time) }
         else
@@ -115,8 +110,8 @@ class TabelsController < ApplicationController
     # PATCH/PUT /tabels/1.json
   def update
     @tabel     = Tabel.find(params[:id])
-    @personal  = Personal.find(@tabel.personal_id)
-    @mond      = Mond.find(@tabel.mond_id)
+    #@personal  = Personal.find(@tabel.personal_id)
+    #@mond      = Mond.find(@tabel.mond_id)
     #@tabel.save
     #calc_tabel
     respond_to do |format|
@@ -125,13 +120,13 @@ class TabelsController < ApplicationController
         @tabel.save
         case  $params
         when $format_time
-          format.html { redirect_to tabel_path(@tabel,format: $format_time), notice: 'Карта начисления сохранена' }
+          format.html { redirect_to tabel_path(@tabel,format: $format_time)}#, notice: 'Карта начисления сохранена' }
           format.json { render :show, status: :ok, location: @tabel }
         when $format_tabel
-          format.html { redirect_to tabel_path(@tabel,format: $format_tabel), notice: 'Карта начисления сохранена' }
+          format.html { redirect_to tabel_path(@tabel,format: $format_tabel)}#, notice: 'Карта начисления сохранена' }
           format.json { render :show, status: :ok, location: @tabel }
         when $format_buchtabel
-          format.html { redirect_to tabel_path(@tabel,format: $format_buchtabel), notice: 'Карта начисления сохранена' }
+          format.html { redirect_to tabel_path(@tabel,format: $format_buchtabel)}#, notice: 'Карта начисления сохранена' }
           format.json { render :show, status: :ok, location: @tabel }
         end
       else
@@ -165,6 +160,8 @@ class TabelsController < ApplicationController
     #@tabel.personal_id   = @personal.id
     @personal = Personal.find(@tabel.personal_id)
     @tabel.title         = @personal.title
+    @tabel.forname       = @personal.forname
+    @tabel.fornametwo    = @personal.fornametwo
     @tabel.kadr          = @personal.kadr
     @tabel.email         = @personal.email
     @tabel.num_otdel     = @personal.num_otdel

@@ -14,10 +14,10 @@
     <table border="1">
       <caption><h2>
         Администратор <br>
-        <%= @personal.title  %>
+        <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
         <%= @admin.email  %></h2>
-        <h2>Доступ к странице </h2>
-        <h1><%= $level_index_controller[@level.access_controller] %></h1>
+        <h3>Доступ к странице <br>
+          <font color="red"><%= $level_index_controller[@level.access_controller] %></font></h3>
       </caption>
 
       <tbody>

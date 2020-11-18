@@ -2,7 +2,7 @@
 <table border = "1">
   <caption><h3>
     Отзывы на сотрудников<br>
-    <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3>
+    <%= $monat_array[@mond.num_monat.to_i] %>  <%= @mond.yahre %></h3>
     <%= @otdel %><%= $reestr_block_umblock[@mond.block_comment] %>
 </caption>
   <thead>
@@ -21,9 +21,8 @@
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
       <td><%= num += 1 %></td>                                   <!-- гендиректору можно -->
       <td class="list_action"><%= link_to f.title, comments_show_path(f.id) %></td>
-      <% @personal = Personal.find_by(id: f.personal_id) %>
-      <td align="left"><%= @personal.forname %></td>
-      <td><%= f.kadr  %></td>
+      <td align="left"><%= @tabel.forname %></td>
+      <td align="left"><%= f.kadr  %></td>
       <td align="center"><%= $otdel_long[f.num_otdel.to_i] %></td>
       <% if @mond.block_comment == 0  %>
         <td align="center"> <%= link_to "Написать", new_comment_path(f.id)  %></td>

@@ -1,13 +1,13 @@
 <!-- form for new comment -->
 <caption>
-  <h3>Отзыв по работе сотрудника<br>
-    <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>>
+  <h3>Новый отзыв по работе сотрудника<br>
+    <font color="red"><%= @comment.title %>   <%= @comment.forname %>   <%= @comment.fornametwo %></font><br>
     за <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %></h3>
 </caption>
 <%= form_for(@comment) do |f| %>
     <%= f.text_area(:body, size: "50x4") %> <br>
     <%= "Оценка" %> <%= f.select :plunus, (1..10) %> <br><br>
-    <%= "Автор отзыва:" %>   <%= @real_admin.title %><br>
+    <%= "Автор отзыва:" %>   <%= $real_admin.title %><br>
   <br>
     <button class="button"> <%= f.submit("Сохранить") %></button>
 <% end %>

@@ -3,7 +3,7 @@
 <table border="1" style="background-color: #b1f3d8" >
   <caption><h2> Текущий месяц<br>
     <%= $monat_array[$jetzt_num_monat] %>  <%= $jetzt_yahre %></h2>
-    <% if @mond.block_mond == 0 %> (изменения разрешены) <%end %></caption>
+    <%= $reestr_block_umblock[@mond.block_mond] %></caption>
   <thead>
    <% n = 0 %>
   </thead><color=background: #52c5dd>

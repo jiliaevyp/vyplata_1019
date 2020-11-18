@@ -10,11 +10,12 @@
     <th>№</th>
     <th align="center"><%=  link_to 'Фамилия', personals_path(sort_by_name: "1")  %></th>
     <th align="center">Имя</th>
+    <th align="center">Отчество</th>
     <th align="center"><%=  link_to 'Должность', personals_path(sort_by_kadr: "1")  %></th>
     <th align="center"><%=  link_to 'Отдел', personals_path(sort_by_otdel: "1")  %></th>
     <th>Образование</th>
     <% if $glob_permition > 0 %>
-      <th>Допуск</th><%end %>
+      <th align="center"><%=  link_to 'Допуск', personals_path(sort_by_dopusk: "1")  %></th><%end %>
   </tr>
   </thead>
   <tbody>
@@ -28,6 +29,7 @@
           <td><%= t.title %></td>
         <%end %>
         <td><%= t.forname %></td>
+        <td><%= t.fornametwo %></td>
         <td><%= t.kadr  %></td>
         <td align="left"><%= $otdel_long[t.num_otdel.to_i]  %></td>
           <td align="center" ><%= t.bilding  %></td>

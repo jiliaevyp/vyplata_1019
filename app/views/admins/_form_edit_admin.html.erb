@@ -12,8 +12,9 @@
     </div>
   <% end %>
   <table border="1">
-    <caption><h3>Карта пользователя</h3></caption>
-
+    <caption> <h3>Персональная карта сотрудника <br>
+      <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
+    </h3></caption>
     <thead>
     <tr>
       <th>№</th>
@@ -23,7 +24,6 @@
     </thead>
     <% n=0 %>
     <tbody>
-    <tr> <td><%= n += 1 %></td> <td>Фамилия:</td> <td align="center"><%= @personal.title %></td> </tr>
     <tr> <td><%= n += 1 %></td> <td>Эл. почта</td><td align="center"><%= @personal.email %></td>
     <tr> <td><%= n += 1 %></td> <td>Пароль</td> <td align = "center"><%= f.text_field :password, :class => "input" %></td> </tr>
     <tr> <td><%= n += 1 %></td> <td>Пароль</td> <td align = "center"><%= f.password_field :password_confirmation, :class => "input" %></td> </tr>

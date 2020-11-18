@@ -5,6 +5,8 @@ class CreateTabels < ActiveRecord::Migration
          t.references :mond, index: true, foreign_key: true
          # ============ берутся из Personal
          t.string  :title
+         t.string  :forname
+         t.string  :fornametwo
          t.string  :kadr
          t.string  :email
          t.integer :num_otdel

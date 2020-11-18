@@ -6,6 +6,8 @@ class CreateComments < ActiveRecord::Migration
       t.references :tabel, index: true, foreign_key: true
       #============= из Personal ===============
       t.string  :title
+      t.string  :forname
+      t.string  :fornametwo
       t.string  :email
       #============= вводятся здесь ===============
       t.integer :commenter_id
@@ -13,6 +15,9 @@ class CreateComments < ActiveRecord::Migration
       t.text    :body
       t.integer :plunus, default: 0
       t.date    :data
+      # ============ берутся из Mond
+      t.integer :num_monat
+      t.string  :yahre
 
       t.integer :close_update     #флаг защиты на внесение изменения "0" - запрещено
       t.string  :reservstring     #резерв

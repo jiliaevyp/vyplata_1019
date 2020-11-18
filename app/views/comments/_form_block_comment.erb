@@ -1,0 +1,11 @@
+<!-- render for Comment block/umblock -->
+
+<%= form_tag(@controller_name, method: "get", class: "nifty_form") do %>
+    <% if @mond.block_comment == 1 %>
+    <li><%= submit_tag("Открыть реестр",name:"commit_open_comment",
+                           data: {confirm:'Открыть реестр?',referral_code: "1234" })%></li>
+    <% else %>
+    <li><%= submit_tag("Закрыть реестр" , name:"commit_close_comment",
+                           data: {confirm:'Закрыть реестр?'})%></li>
+    <% end %>
+<% end %>

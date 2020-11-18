@@ -6,7 +6,10 @@
     <div class="sidebar"><%= render('welcome/form_sidebar') %> </div>
     <div class="content">
       <% if @access_index >0 %>
-        <%= render('form_index_comment') %>
+        <%= render('form_index_comment') %><br>
+        <% if @access_full >0 %>
+          <%= render('form_block_comment') %><br>
+        <%end %>
       <% else %>
         <h1>Отсутствует доступ к данным!</h1>
       <% end %>

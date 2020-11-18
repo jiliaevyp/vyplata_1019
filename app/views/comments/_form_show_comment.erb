@@ -1,8 +1,8 @@
 
 <table border="1">
   <caption><h3> Отзыв на сотрудника<br>
-    <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
-  <%= $monat_array[$jetzt_num_monat.to_i] %>   <%= $jetzt_yahre %>
+    <font color="red"><%= @comment.title %>   <%= @comment.forname %>   <%= @comment.fornametwo %></font><br>
+    <%= $monat_array[@comment.num_monat.to_i] %><%= @comment.yahre %>
   </h3></caption>
   <thead>
   <th>Автор</th><th align = "center"><%= @comment.commenter_title %></th>

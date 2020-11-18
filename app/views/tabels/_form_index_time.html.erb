@@ -3,7 +3,7 @@
 <table border = "1">
   <caption>
     <h3>Табель<br>
-      <%= $monat_array[$jetzt_num_monat.to_i] %>    <%= $jetzt_yahre %> <br>
+      <%= $monat_array[@mond.num_monat.to_i] %>  <%= @mond.yahre %> <br>
       Рабочих дней=<%=@mond.tag %> Часов=<%=@mond.hour %></h3>
     <%= @otdel %>      <%= $reestr_block_umblock[@mond.block_timetabel] %>
   </caption>
@@ -30,15 +30,14 @@
       <td align="center"><%= num += 1 %></td>
       <% if @access_show > 0 %>
         <% if f.tagemach == 0 && f.hourmach == 0 && @access_edit > 0 %>
-            <td align="left"><%= link_to f.title, edit_tabel_path(f, params[:format])  %></td>
+          <td align="left"><%= link_to f.title, edit_tabel_path(f, params[:format])  %></td>
         <%else %>
-        <td align="left"><%= link_to f.title, tabel_path(f, params[:format])  %></td>
+          <td align="left"><%= link_to f.title, tabel_path(f, params[:format])  %></td>
         <%end %>
       <% else %>
         <td align="left"><%= f.title %></td>
       <% end %>
-        <% @personal = Personal.find_by(id: f.personal_id) %>
-        <td align="left"><%= @personal.forname %></td>
+        <td align="left"><%= f.forname %></td>
         <td align="center"><%= f.kadr %></td>
         <% if @access_all_otdel > 0 %><td align="left"><%= $otdel_long[f.num_otdel.to_i] %></td><% end %>
         <td align="center"><%= f.tagemach %></td>

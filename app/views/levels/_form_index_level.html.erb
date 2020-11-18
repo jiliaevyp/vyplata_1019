@@ -1,9 +1,8 @@
 
 <table border="1" >
-  <caption><h2>
-    Администратор <br>
-    <%= @personal.title  %><br>
-    <%= @admin.email  %></h2>
+  <caption> <h3>Администратор <br>
+    <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
+    <%= @admin.email  %></h3>
     <h3>Доступ к страницам сайта </h3>
     </caption>
 
@@ -26,9 +25,10 @@
     </thead>
     <tbody>
     <%num = 0 %>
+
     <% if @levels %>
       <% @levels.each do |t| %>
-        <tr >
+        <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
           <td align="center"><%= num += 1 %></td>
           <td align="center"><%= link_to $level_index_controller[t.access_controller], level_path(t) %></td>
           <% if t.access_controller == $tabels%>

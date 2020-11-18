@@ -1,8 +1,8 @@
 <!-- render for show @buchtabel -->
   <table border="1">
     <caption> <h3>Карта ведомости <br>
-      <font color="red"><%= @personal.title %>   <%= @personal.forname %>   <%= @personal.fornametwo %></font><br>
-      <%= $monat_array[$jetzt_num_monat.to_i] %>  <%= $jetzt_yahre %></h3></caption>
+      <font color="red"><%= @tabel.title %>   <%= @tabel.forname %>   <%= @tabel.fornametwo %></font><br>
+      <%= $monat_array[@tabel.num_monat.to_i] %>  <%= @tabel.yahre %></h3></caption>
     <tbody>
     <% num = 0 %>
     <tr> <td><%=num += 1 %></td> <td>Должность</td> <td align="center">              <%= @tabel.kadr %></td></tr>

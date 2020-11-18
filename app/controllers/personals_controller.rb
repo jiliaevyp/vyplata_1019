@@ -13,6 +13,7 @@ class PersonalsController < ApplicationController
     @sort_by_name = params[:sort_by_name]
     @sort_by_otdel = params[:sort_by_otdel]
     @sort_by_kadr = params[:sort_by_kadr]
+    @sort_by_dopusk = params[:sort_by_dopusk]
     if @sort_by_name.nil? && @sort_by_otdel.nil? && @sort_by_kadr.nil?
       @sort_by_name = "1"
     end
@@ -25,8 +26,9 @@ class PersonalsController < ApplicationController
         @personals = Personal.order(:num_otdel)
         when  @sort_by_kadr
         @personals = Personal.order(:kadr)
+      when  @sort_by_dopusk
+        @personals = Personal.order(:personal_admin)
       end
-
     else
       if $real_admin && @level       # if Personal is not empty
         if @access_all_otdel > 0

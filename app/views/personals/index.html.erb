@@ -17,7 +17,7 @@
       <%= render 'form_index_personals' %>
       <ul><strong>
       <% if @access_full > 0 || $glob_permition >0 %>
-        <li><%= link_to 'Новый сотрудник', new_personal_path(@personal) %></li>
+        <li><%= link_to 'Новый сотрудник', new_personal_path(@personal) %></li><br>
         <li><%= render 'form_block_personals' %></li>
       </strong></ul>
       <%end %>

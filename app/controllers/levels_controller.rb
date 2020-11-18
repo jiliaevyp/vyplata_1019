@@ -61,7 +61,7 @@ class LevelsController < ApplicationController
           @level.format = $format_unknown
         end
         @level.save
-        format.html { redirect_to @level, notice: 'Карта доступа успешно создана.' }
+        format.html { redirect_to @level} #, notice: 'Карта доступа успешно создана.' }
         format.json { render action: 'show', status: :created, location: @level }
       else
         format.html { render action: 'new' }
@@ -80,7 +80,7 @@ class LevelsController < ApplicationController
       if @level.update(level_params)
         #abort @level.access_controller.inspect
         #abort @level.access_all_otdel.inspect
-        format.html { redirect_to @level, notice: 'Карта доступа успешно изменена'  }
+        format.html { redirect_to @level} #, notice: 'Карта доступа успешно изменена'  }
         format.json { render action: 'show', status: :ok, location: @level }
       else
         format.html { render action: 'edit' }
@@ -95,7 +95,7 @@ class LevelsController < ApplicationController
     admin_id = @level.admin_id
     @level.destroy
     respond_to do |format|
-      format.html { redirect_to levels_url(admin_id), notice: 'Карта доступа удалена' }
+      format.html { redirect_to levels_url(admin_id)} #, notice: 'Карта доступа удалена' }
       format.json { head :no_content }
     end
   end

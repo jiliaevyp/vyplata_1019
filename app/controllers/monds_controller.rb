@@ -65,7 +65,7 @@ class MondsController < ApplicationController
         $jetzt_yahre = @mond.yahre
         $jetzt_num_monat  = @mond.num_monat
         new_tabel             # создание новой ведомости
-        format.html { redirect_to @mond, notice:'Созданы новый месяц и ведомость' }
+        format.html { redirect_to @mond} #, notice:'Созданы новый месяц и ведомость' }
         format.json { render action: 'show', status: :created, location: @mond }
       else
         format.html { render action: 'new' }
@@ -119,6 +119,8 @@ class MondsController < ApplicationController
         @tabel.procentsocial = @mond.procentsocial
         @tabel.personal_id   = f.id
         @tabel.title         = f.title
+        @tabel.forname       = f.forname
+        @tabel.fornametwo    = f.fornametwo
         @tabel.kadr          = f.kadr
         @tabel.email         = f.email
         @tabel.num_otdel     = f.num_otdel
@@ -157,7 +159,7 @@ class MondsController < ApplicationController
     $jetzt_monat = $monat_array[@mond.num_monat.to_i]
     $jetzt_num_monat  = @mond.num_monat
     respond_to do |format|
-      format.html { redirect_to mond_path, notice: 'Установлен новый рабочий месяц' }
+      format.html { redirect_to mond_path} #, notice: 'Установлен новый рабочий месяц' }
       format.json { head :no_content }
     end
   end
