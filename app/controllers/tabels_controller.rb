@@ -11,14 +11,12 @@ class TabelsController < ApplicationController
     else
       @otdel  = $otdel_long[$real_admin.num_otdel] +"  отдел"
     end
-    #abort params[:format].inspect
     @sort_by_name = params[:sort_by_name]
     @sort_by_otdel = params[:sort_by_otdel]
     @sort_by_kadr = params[:sort_by_kadr]
     if @sort_by_name.nil? && @sort_by_otdel.nil? && @sort_by_kadr.nil?
       @sort_by_name = "1"
     end
-    #abort @access_print.inspect
     if @mond.nil? == false         # проверяем что есть запись Mond
       if @access_all_otdel > 0
         case "1"
@@ -50,8 +48,6 @@ class TabelsController < ApplicationController
     # просмотр карты ведомости    params[:format]==$format_buchtabel
   def show
     @tabel      = Tabel.find(params[:id])
-    #@mond       = Mond.find(@tabel.mond_id)
-    #@personal   = Personal.find_by(id: @tabel.personal_id)       # добавить поле tabel_id in Comment
     @comments   = Comment.where(tabel_id: @tabel.id,mond_id: @tabel.mond_id)
     calc_tabel
     send_cardtabel_to_mail
@@ -92,8 +88,7 @@ class TabelsController < ApplicationController
     Tabel.where(mond_id: @mond.id, personal_id: @personal.id).delete_all
       add_tabel
       calc_tabel
-      @tabel.save
-    #abort @tabel.updated_at.inspect
+    #@tabel.save
       respond_to do |format|
         if @tabel.save
           format.html { redirect_to tabel_path(@tabel, format:$format_time)}#, notice: 'Карта табеля успешно создана' }
@@ -110,10 +105,6 @@ class TabelsController < ApplicationController
     # PATCH/PUT /tabels/1.json
   def update
     @tabel     = Tabel.find(params[:id])
-    #@personal  = Personal.find(@tabel.personal_id)
-    #@mond      = Mond.find(@tabel.mond_id)
-    #@tabel.save
-    #calc_tabel
     respond_to do |format|
       if @tabel.update(tabel_params)
         calc_tabel
@@ -155,9 +146,7 @@ class TabelsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def add_tabel               #добавление нового табеля
-    #@tabel= Tabel.new
-    #@tabel.personal_id   = @personal.id
+  def add_tabel               #добавление нового сотрудника в существующий табель
     @personal = Personal.find(@tabel.personal_id)
     @tabel.title         = @personal.title
     @tabel.forname       = @personal.forname

@@ -29,18 +29,16 @@ class CommentsController < ApplicationController
     @comment  = Comment.find(params[:id])
     if @comment
       @tabel    = Tabel.find(@comment.tabel_id)
-      #@mond     = Mond.find(@comment.mond_id )
+      @mond     = Mond.find(@comment.mond_id )
     end
   end
 
   # просмотр выборки отзывов за месяц
   def comments_show
-    #@mond   = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
     @srnplunus  = 0
     @tabel  = Tabel.find(params[:id])
     @mond   = Mond.find(@tabel.mond_id)
     if @tabel
-      #@personal = Personal.find(@tabel.personal_id)
       @comments = Comment.where(tabel_id: @tabel.id, mond_id: @mond.id)
       @sumplunus = @comments.sum(:plunus)
       @count_plunus = @comments.count
@@ -54,30 +52,23 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    #@mond     = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
     @tabel    = Tabel.find(params[:format])
     @mond   = Mond.find(@tabel.mond_id)
     $tabel_id = @tabel.id
-    #@personal = Personal.find(@tabel.personal_id)
     @comment  = Comment.new
   end
 
   # GET /comments/1/edit
   def edit
-    #@mond     = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
     @comment  = Comment.find(params[:id])
     @mond     = Mond.find(@comment.mond_id )
-    #@personal = Personal.find(@comment.personal_id)
     @tabel    = Tabel.find(@comment.tabel_id)
   end
 
   # POST /comments
   # POST /comments.json
   def create
-    #@mond     = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
     @tabel    = Tabel.find($tabel_id)
-    #@mond     = Mond.find(@tabel.mond_id)
-    #@personal = Personal.find(@tabel.personal_id)
     @comment  = Comment.new(comment_params)
     @comment.tabel_id       =  @tabel.id
     @comment.personal_id    =  @tabel.personal_id
@@ -108,7 +99,6 @@ class CommentsController < ApplicationController
       @comment.updated_at = Time.zone.now
       @comment.data       = Time.zone.now
       if @comment.update(comment_params)
-        #@mond = Mond.find_by(num_monat: $jetzt_num_monat, yahre: $jetzt_yahre )
         format.html { redirect_to @comment} #, notice: 'Отзыв на сотрудника обновлен' }
         format.json { head :no_content }
       else

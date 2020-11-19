@@ -21,7 +21,7 @@
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
       <td><%= num += 1 %></td>                                   <!-- гендиректору можно -->
       <td class="list_action"><%= link_to f.title, comments_show_path(f.id) %></td>
-      <td align="left"><%= @tabel.forname %></td>
+      <td align="left"><%= f.forname %></td>
       <td align="left"><%= f.kadr  %></td>
       <td align="center"><%= $otdel_long[f.num_otdel.to_i] %></td>
       <% if @mond.block_comment == 0  %>

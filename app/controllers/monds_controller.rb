@@ -103,11 +103,11 @@ class MondsController < ApplicationController
     end
   end
 
-  def new_tabel               #создание новой ведомости
+  def new_tabel               # создание новой ведомости
     @personals  = @personals  = Personal.where(real: $real[1]).order(:title)    #  выбрали только тех кто в штате
     if @personals                                                     # @personals is not empty
       @personals.each do |f|
-        @mond = Mond.find_by(yahre: $jetzt_yahre, num_monat: $jetzt_num_monat)
+        #@mond = Mond.find_by(yahre: $jetzt_yahre, num_monat: $jetzt_num_monat)
         @tabel  = Tabel.new
         @tabel.mond_id       = @mond.id
         @tabel.kfnalog       = @mond.kfnalog
