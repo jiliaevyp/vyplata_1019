@@ -16,10 +16,7 @@
 
  <div class="content">
    <%= render('form_index_mond') %>
-   <%if @mond && @access_full >0 %>
-    <%= render 'form_block_time' %>
-    <%= render 'form_block_tabel' %>
-    <%= render 'form_block_buchtabel' %>
+
    <%end %>
    <% if $glob_permition > 0 || @access_new >0 %>
      <br><button class="button"><%= link_to "Новый месяц", new_mond_path %></button>

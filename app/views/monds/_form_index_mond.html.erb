@@ -30,13 +30,13 @@
           <td align="center"><%= t.kfoberhour %></td>
           <td align="center"><%= t.kfnalog %></td>
           <td align="center"><%= t.procentsocial %></td>
-          <% if t.close_update == 1 %>
+          <% if t.block_mond == 1 %>
             <td align="center">Блокирован</td>
           <% else %>
             <td align="center">Открыт</td>
           <% end %>
-          <% if $glob_permition > 0 || @access_del > 0%>
-          <td><%= link_to 'Удалить',  t, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+          <% if ($glob_permition > 0 || @access_del > 0) && t.block_mond == 0 %>
+          <td><%= link_to 'Удалить',  t, method: :delete, data: { confirm: 'Будет удалена текущая ведомость. Вы уверены?' } %></td>
           <% else %>
               <td align="center"> Удалить</td>
           <% end %>

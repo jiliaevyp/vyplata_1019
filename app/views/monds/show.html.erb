@@ -17,7 +17,7 @@
   <div class="content_1_col">
    <%= render('form_mond') %>
      <ul><strong>
-       <% if @access_edit >0 || $glob_permition > 0 %>
+       <% if @mond.block_mond == 0 && (@access_edit >0 || $glob_permition > 0) %>
       <li><%= link_to 'Изменить', edit_mond_path(@mond) %><br></li>
       <li><%= link_to 'Назначить рабочим', set_monat_path(@mond) %><br></li>
        <% else %>
@@ -26,13 +26,18 @@
        <% end %>
        <% if @mond.block_mond == 0 && (@access_del >0 || $glob_permition > 0) %>
       <li><%= link_to 'Удалить', @mond, method: :delete, data:
-              { confirm: 'Удалить месяц, Вы уверены?' } %></li>
+              { confirm: 'Будет удалена и ведомость, вы уверены?'} %></li>
        <% else %>
       <li> Удалить</li>
         <% end %>
       </strong></ul>
-    <%if @access_full > 0 %>
+    <%if @access_full > 0 || $glob_permition > 0 %>
     <%= render 'form_block_mond' %><br>
+    <%end %>
+    <%if (@mond && @access_full >0)|| $glob_permition > 0 %>
+      <%= render 'form_block_time' %>
+      <%= render 'form_block_tabel' %>
+      <%= render 'form_block_buchtabel' %><br>
     <%end %>
      <button class="button"><%= link_to 'Выход', monds_path %></button>
   </div>

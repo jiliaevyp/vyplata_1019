@@ -22,11 +22,6 @@ class MondsController < ApplicationController
         else
           $flag_for_admin   = 1
         end
-        if @access_full > 0
-          commit_block_time
-          commit_block_tabel
-          commit_block_buchtabel
-        end
       end
 
   end
@@ -36,6 +31,9 @@ class MondsController < ApplicationController
   def show
     @mond = Mond.find(params[:id])
     commit_block_mond
+    commit_block_time
+    commit_block_tabel
+    commit_block_buchtabel
   end
 
   # GET /monds/new
@@ -59,16 +57,30 @@ class MondsController < ApplicationController
     @mond.block_timetabel = 0
     @mond.block_tabel     = 0
     @mond.block_buchtabel = 0
-    Mond.where(yahre: @mond.yahre, num_monat: @mond.num_monat).delete_all
-    respond_to do |format|
-      if @mond.save
-        $jetzt_yahre = @mond.yahre
-        $jetzt_num_monat  = @mond.num_monat
-        new_tabel             # создание новой ведомости
-        format.html { redirect_to @mond} #, notice:'Созданы новый месяц и ведомость' }
-        format.json { render action: 'show', status: :created, location: @mond }
-      else
-        format.html { render action: 'new' }
+    @old_mond = Mond.find_by(yahre: @mond.yahre, num_monat: @mond.num_monat)
+    @block_mond = 0
+    if @old_mond
+      if @old_mond.block_mond == 1
+        @bloc_mond = 1
+      end
+    end
+    if @bloc_mond == 0
+      Mond.where(yahre: @mond.yahre, num_monat: @mond.num_monat).delete_all
+      respond_to do |format|
+        if @mond.save
+          $jetzt_yahre = @mond.yahre
+          $jetzt_num_monat  = @mond.num_monat
+          new_tabel             # создание новой ведомости
+          format.html { redirect_to @mond} #, notice:'Созданы новый месяц и ведомость' }
+          format.json { render action: 'show', status: :created, location: @mond }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @mond.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { render action: 'new', notice:"Год и месяц были созданы ранее, замена запрещена!"}
         format.json { render json: @mond.errors, status: :unprocessable_entity }
       end
     end
@@ -166,16 +178,15 @@ class MondsController < ApplicationController
 
   # обработка кнопки блокировки/разблокировки табеля рабочего времени
   def commit_block_mond
-    @commit_open   = params[:commit_open_mond]            # была нажата "открыть ведомость"
-    @commit_close  = params[:commit_close_mond]            # была нажата "Закрыть ведомость"
-
+    @commit_open   = params[:commit_open_mond]            # была нажата "открыть месяц"
+    @commit_close  = params[:commit_close_mond]            # была нажата "Заблокировать месяц"
     if @commit_open
       @mond.block_mond = 0
       @mond.save
     end
     if @commit_close
       @mond.block_mond = 1           # изменения запрещены
-      @mond.save
+      @mond.save                     # месяц также автоматически блокируется если заблокирован Tabel.time
     end
   end
 
@@ -191,7 +202,8 @@ class MondsController < ApplicationController
       @mond.save
     end
     if @commit_close
-      @mond.block_timetabel = 1           # изменения запрещены
+      @mond.block_timetabel = 1       # изменения запрещены
+      @mond.block_mond = 1            # изменения запрещены для текущего месяца его удаление запрещено
       @mond.save
     end
   end
@@ -225,6 +237,7 @@ class MondsController < ApplicationController
       @mond.block_buchtabel = 1       # изменения запрещены
       @mond.block_timetabel = 1       # изменения запрещены и для табеля рабочего времени
       @mond.block_tabel = 1           # изменения запрещены и для табеля начисления
+      @mond.block_mond = 1           # изменения запрещены и для табеля начисления
       @mond.save
     end
   end

@@ -38,5 +38,5 @@
         <td align="center"><%= f.select :block_mond, options_for_select($base_block),:class => "input"  %></td> </tr>
  </tbody>
 </table><br>
-  <submit><%= f.submit "Сохранить" %></submit>
+  <submit><%= f.submit "Сохранить", data: {confirm:'Будет удалена старая ведомость, вы уверены?'} %></submit>
 <% end %>
