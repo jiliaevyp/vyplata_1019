@@ -6,7 +6,21 @@ class MondsController < ApplicationController
     # GET /monds
   # GET /monds.json
   def index
-    @monds = Mond.where(yahre: $jetzt_yahre).order(:num_monat)
+    @date = params[:date]
+    if @date
+      @yahre = @date["year"]
+      #abort @yahre.inspect
+    end
+    #select_yahre
+    #@jetz_yahre = params[:jetz_yahre]
+
+    if @yahre
+      @ind_yahre  = @yahre + "  год"
+      @monds = Mond.where(yahre: @yahre).order(:num_monat)
+    else
+      @ind_yahre = "за все годы"
+      @monds = Mond.order(:yahre,:num_monat)
+    end
       if @monds.nil?
         $jetzt_yahre  = nil
         $jetzt_num_monat = nil
@@ -23,7 +37,7 @@ class MondsController < ApplicationController
           $flag_for_admin   = 1
         end
       end
-
+    #select_yahre
   end
 
   # GET /monds/1
@@ -58,14 +72,18 @@ class MondsController < ApplicationController
     @mond.block_tabel     = 0
     @mond.block_buchtabel = 0
     @old_mond = Mond.find_by(yahre: @mond.yahre, num_monat: @mond.num_monat)
-    @block_mond = 0
-    if @old_mond
-      if @old_mond.block_mond == 1
-        @bloc_mond = 1
+    @block_mond = 1
+    if @old_mond.nil?
+      @block_mond == 0
+    else
+      if @old_mond.block_mond == 0
+        @bloc_mond = 0
       end
     end
+    #abort @block_mond.inspect
     if @bloc_mond == 0
       Mond.where(yahre: @mond.yahre, num_monat: @mond.num_monat).delete_all
+      #abort @block_mond.inspect
       respond_to do |format|
         if @mond.save
           $jetzt_yahre = @mond.yahre
@@ -74,13 +92,15 @@ class MondsController < ApplicationController
           format.html { redirect_to @mond} #, notice:'Созданы новый месяц и ведомость' }
           format.json { render action: 'show', status: :created, location: @mond }
         else
-          format.html { render action: 'new' }
+          format.html { render action: 'new', notice:"Год и месяц были созданы ранее, замена запрещена!" }
           format.json { render json: @mond.errors, status: :unprocessable_entity }
         end
       end
     else
       respond_to do |format|
-        format.html { render action: 'new', notice:"Год и месяц были созданы ранее, замена запрещена!"}
+        #abort @block_mond.inspect
+        @monds = Mond.where(yahre: $jetzt_yahre).order(:num_monat)
+        format.html { render action: 'index', notice:"Год и месяц были созданы ранее, замена запрещена!"}
         format.json { render json: @mond.errors, status: :unprocessable_entity }
       end
     end
@@ -112,6 +132,14 @@ class MondsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to monds_url, notice: ('Месяц и ведомость удалены') }
       format.json { head :no_content }
+    end
+  end
+
+  def select_yahre
+    @params_yahre = params[:yahre]
+    if @params_yahre
+      @yahre= @params_yahre[0]
+      abort @yahre.inspect
     end
   end
 

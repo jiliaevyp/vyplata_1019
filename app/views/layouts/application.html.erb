@@ -238,8 +238,8 @@
   <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
   <% end %>
-  <p class="alert"><!-%= alert %></p>
-  <!--p class="notice"><!-%= notice %></p>-->
+  <p class="alert"><%= alert %></p>
+  <p class="notice"><%= notice %></p>
 
 <style media='print' type='text/css'>
     #navbar-iframe {display: none; height: 0px; visibility: hidden;}
@@ -278,7 +278,7 @@
     @block_tabel=         <%if @mond.block_tabel %><%= @mond.block_tabel %> <%else %>unknown!<%end %>
     @block_buchtabel=     <%if @mond.block_buchtabel %><%= @mond.block_buchtabel %> <%else %>unknown!<%end %><p>
 <%end %>
-  <%if nil %>
+  <%if 1 %>
 <@access_full =   <% if @access_full %><%= @access_full %> <% else %>unknown!<% end %>
 @access_all_otdel=<% if @access_all_otdel %> <%= @access_all_otdel %> <% else %>unknown!<% end %>
 @access_index =   <% if @access_index %> <%= @access_index %> <%else %>unknown!<% end %>

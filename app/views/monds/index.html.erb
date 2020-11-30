@@ -16,10 +16,9 @@
 
  <div class="content">
    <%= render('form_index_mond') %>
-
-   <%end %>
    <% if $glob_permition > 0 || @access_new >0 %>
-     <br><button class="button"><%= link_to "Новый месяц", new_mond_path %></button>
+     <br><button class="button"><%= link_to "Новый месяц", new_mond_path %></button><br><br>
+     <%= render('form_select_yahre') %>
    <% end %>
  </div>
 </div>

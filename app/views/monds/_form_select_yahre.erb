@@ -1,0 +1,8 @@
+<!-- render for Mond select_yahre -->
+
+<%= form_tag(@controller_name, method: "get", class: "nifty_form") do %>
+  <legend>Выберите год</legend><br>
+  <h3<%= label_tag(:year, "Год") %>
+  <td><%= select_year(2020, start_year: 2020, end_year: 2030)%></td><br>
+    <%= submit_tag("Подтвердить" ,class: "submit") %>
+<% end %>
