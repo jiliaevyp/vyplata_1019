@@ -41,15 +41,15 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'mail.nic.ru',
-      #address: 'smtp.catelecom.ru',
+      address: '',
+      #address: '',
       #use_ssl: true,
       port: 25,
-      domain: 'mail.nic.ru',
+      domain: '',
       #authentication: 'plain',
       #enable_starttls_auto: true,
-      user_name: "sendertab@catelecom.ru",
-      password: 'jc39vI71'
+      user_name: "",
+      password: ''
 
   }
   # Raises error for missing translations
